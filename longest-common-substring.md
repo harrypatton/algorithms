@@ -1,5 +1,6 @@
 ##Original
 1. http://algorithms.tutorialhorizon.com/dynamic-programming-longest-common-substring/
+2. http://www.geeksforgeeks.org/longest-common-substring/
 
 ##Overview
 **Objective**: Given two string sequences write an algorithm to find the length of longest substring present in both of them.
@@ -27,9 +28,14 @@ Use tabular matrix to calculate the result. The cell value means the longest com
 2. Otherwise, the value is zero.
 3. After calculation is done, rescan the matrix to get max value.
 
+Both time and space complexity is O(m * n).
+
 ###How to get the substring
 Given the cell with max cell, back track the diagonal cell until the value is zero.
 
 ##Learning
 1. Sometimes it is easy to start with DP directly. Recursion => DP is not always obvious.
 2. In DP, it is important to understand the meaning of cell value (i.e., the meaning of subtask.)
+
+##Note
+Update #1: geeksforgeeks shows a suffix-tree solution better than DP. Its time complexity is O(m+n). (Awesome).
