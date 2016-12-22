@@ -47,3 +47,4 @@ Please note, it can be changed to ``f[i][j] = min(f[i-1][j], f[i][j-1]) - value`
 
 ##Learning
 1. Nothing. Just need to think carefully before giving up.
+2. To handle edge cases, we can assume f[m+1][n] = 1, f[m][n+1] = 1, and initial vlaues for other cells are int_max, so it is easy to calculate all of them. Check leetcode discussion.
