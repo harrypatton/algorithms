@@ -3,7 +3,7 @@ The original problem could be found in the following places,
 * http://www.geeksforgeeks.org/dynamic-programming-set-7-coin-change/
 
 #Overview
-##Object
+##Objective
 Given a set of coins and amount, write an algorithm to find out how many ways we can make the change of the amount using the coins given.
 
 ##Constraints
