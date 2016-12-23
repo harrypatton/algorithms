@@ -37,4 +37,4 @@ Space complexity: O(n). just an array.
 **Note**: the one in original post shows a better solution. Check Learning part.
 
 #Learning
-1. The DP is not optimal one because of the two part combination. Actually the original post from geeksforgeeks shows a better solution with O(n*sqrt(n)). We don't have to try every single combination. We know the element must come from 1 .. sqrt(n). The value should be the minimum one in 1 + func(value - i*i), 1 <= i <= sqrt(n).
+1. The DP is not optimal one because of the two part combination. Actually the original post from geeksforgeeks shows a better solution with O(n*sqrt(n)). We don't have to try every single combination. We know the element must come from 1 .. sqrt(n). The value should be the minimum one of 1 + func(value - i*i) with condition 1 <= i <= sqrt(n). To print out the value, each array element will record the used element (i.e., variable i).
