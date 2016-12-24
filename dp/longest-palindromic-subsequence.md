@@ -25,6 +25,7 @@ Longest Palindromic subsequence: ABCBA or ABDBA or ABEBA
 
 ## DP
 f[i][j] means the substring from position i to j. 
+
 1. if value[i] == value[j], f[i][j] = 2 + f[i+1][j-1].
 2. Otherwise, it is max of (f[i+1][j], f[i][j-1])
 
