@@ -28,6 +28,7 @@ Given a sorted array, let's set two indexes in start and end.
 4. Use recursion to solve sub-problem from #2 and #3.
 
 #Learning
+## The way I think
 I was confused by approach #4 in the beginning. E.g., when array[left] + array[right] > T, we can either move right cursor to left, or move left cursor to left, or both. Why we just move right cursor only? I understood when I thought about the subproblem concept. We always come up with a subproblem to solve and moving left cursor to left is invalid in subproblem context (i.e., left cursor is the first element in array and you cannot move to left.)
 
 The same confusion happened when worked an question which find an element in a 2-dimensional sorted array. The algorithm searches element from top-right element. 
@@ -36,6 +37,8 @@ The same confusion happened when worked an question which find an element in a 2
 * if top-right element > expected value, it moves left one step and eliminates the whole column. Why not move to up? cannot move for top-right element.
 * in above calculation, we exclude one row or column. It becomes a subproblem with a smaller matrix and we can still repeat the same process and the test element is still the top-right element.
 
+## Hash
+I totally forgot the hash table way which is the fastest look-up way when memory is not a big concern. It always comes up with elegant solution.
 
 #Reference
 1. http://stackoverflow.com/questions/4720271/find-a-pair-of-elements-from-an-array-whose-sum-equals-a-given-number
