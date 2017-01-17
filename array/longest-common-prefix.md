@@ -1,6 +1,8 @@
 #Origin
 * http://www.geeksforgeeks.org/longest-common-prefix-set-1-word-by-word-matching/
 * http://www.geeksforgeeks.org/longest-common-prefix-set-2-character-by-character-matching/
+* http://www.geeksforgeeks.org/longest-common-prefix-set-3-divide-and-conquer/
+* http://www.geeksforgeeks.org/longest-common-prefix-set-5-using-trie/
 
 #Overview
 **Objective**: 
@@ -32,5 +34,17 @@ Output : "ap"
 It is the same as previous one.
 
 If there are a huge amount of strings and reading is slow, the "word by word" solution is better because it doesn't need to scan all strings over and over again. In distributed system, it doesn't matter.
+
+##Solution 3 - divide and conquer
+1. Find common longest prefix in first half
+2. Find common longest prefix in second half
+3. Find the result between #1 and #2.
+
+###Complexity
+* Time: n*m (bottom layer) + n*m/2 + n*m/4 + .. + n(top layer) = n * m * (1 + 1/2 + 1/4 + ...) = n*m. so it is O(n*m). n is largest string length and m is string count.
+* Space: O(nlogm) -> recursive methods
+
+##Solution 4 - use trie
+build up the trie and then walk from the root until find the first node which has branches.
 
 #Learning
