@@ -1,4 +1,6 @@
 #Smallest Good Base
+Source: https://leetcode.com/problems/smallest-good-base/
+
 For an integer n, we call k>=2 a good base of n, if all digits of n base k are 1.
 
 Now given a string representing n, you should return the smallest good base of n in string format. 
