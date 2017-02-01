@@ -48,3 +48,7 @@ Note: You may assume there is no extra space or special characters in the input 
 3. Check each group then.
 
 It is better to write a few helper functions.
+
+
+##Learning
+1. The main method includes too much details. It knows some length limitation. My original thought was to quickly check the result but we can wrap that in functions IsIPv4 and IsIPv6 - better encapsulation and the same performance gain.
