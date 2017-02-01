@@ -51,4 +51,4 @@ It is better to write a few helper functions.
 
 
 ##Learning
-1. The main method includes too much details. It knows some length limitation. My original thought was to quickly check the result but we can wrap that in functions IsIPv4 and IsIPv6 - better encapsulation and the same performance gain.
+1. [The main method](https://github.com/harrypatton/algorithms/blob/master/leetcode/468-validate-ip-address.cs) includes too much details. It knows some length limitation. My original thought was to quickly check the result but we can wrap that in functions IsIPv4 and IsIPv6 - better encapsulation and the same performance gain.
