@@ -16,3 +16,9 @@ I tried a couple of times but didn't find a good solution on it.
 	* For each substring, the checking is O(n) - scan the whole string.
 	* Total complexity: O(n * Sqrt(n)).
 3. Sometimes the brutal force solution is the best solution.
+4. I use separate functions to eliminate a lot of checks in original code like 
+```
+if (!isRepeated) {
+	break;
+}
+```
