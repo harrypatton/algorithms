@@ -25,6 +25,7 @@ This is a typical DP problem with a little tweak.
 **Update**
 
 1. After reading the discussion, it still goes to idea #2. The way to represent the state is using an array of boolean - true means the number is used and false means unused. The key thing is `maxChoosableInteger` is less than 20 so we can use integer to represent the state using bit. 
-2. It still uses some backtrack idea. I need to learn more.
+2. It still uses some **backtrack** idea. I need to learn more.
 3. Without memory cache, the time complexity is O(n!) - enumerate all combinations. I don't understand why it becomes O(2^n) when use memory cache.
 
+Code is simple, check source code [here](https://github.com/harrypatton/algorithms/blob/master/leetcode/464-can-I-win.cs).
