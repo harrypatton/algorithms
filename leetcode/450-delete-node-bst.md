@@ -24,3 +24,5 @@ Two steps,
 Complexity:
 * Time: O(height)
 * Space: O(1)
+
+**Update**: my solution is too complicated and failed on edge cases. Discussion page shows an [easy-to-understand solution using recursion](https://discuss.leetcode.com/topic/65792/recursive-easy-to-understand-java-solution).
