@@ -21,3 +21,6 @@ We can use math to detect that ` Sqrt(n*2) - 2 < m < Sqrt(n*2)`. The problem is,
 2. Is there any better way to reduce the scope `n`? In previous solution, we just try 1 until the result so it is O(n). 
 	* Double checking the formula again, we can get `sqrt(2) * sqrt(n) - 2 < m < sqrt(2) * sqrt(n)`, so we find both lower and upper bound.
 	* Use lower bounds as the baseline. We cannot just use `m*(m+1) /2` because it may overflow so we need to divide by 2 first (the order is based on even or odd).
+
+##Learning
+1. In solution #2, we get an upper and lower bounds. Discussion page shows we know the number at once without any bounds. Check it out.
