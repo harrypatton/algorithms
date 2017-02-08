@@ -38,3 +38,17 @@ public class Solution {
     }
 }
 ```
+
+### Backtrack
+I thought about the idea and got clear when read the solution on discussion page,
+
+1. Every path is top-down. 
+2. Write a function that calculates how many paths that end with current node and its descendants have the target sum. There're some parameters below,
+	* current node: the node we're calculating.
+	* hash table: the sum of different paths from `tree root to current node's each ancestor`. 
+	* target: the sum of path we're trying to find
+	* sum: the sum of path from `tree root to current node's parent`. add current node value to sum so it becomes the `sum of tree root to current node`.
+		* update hash table to include this path. `hash[sum]++ or hash[sum] = 1` depending on previous value.
+		* if hash contains key `sum - target`, it means there's an ancestor that the sum of path between it and current node is `target`. Adding to the result.
+		* call the same function for current node's left tree and right tree.
+		* Update hash table to remove the path from tree root to current node; because it is going to calculate its sibling case.
