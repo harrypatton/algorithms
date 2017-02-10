@@ -11,19 +11,23 @@ public class Solution {
 			charCount[c - 'a']++;
 		}
 		
-		return OriginalDigits(charCount, numUsed);
+		var result = OriginalDigits(charCount, numUsed);
+		
+		char[] resultChar = result.ToArray();
+		Array.Sort(resultChar);
+		return new string(resultChar);
     }
 	
 	public string OriginalDigits(int[] charCount, bool[] numUsed) {
 		var result = string.Empty;
 		
-		for(int i = 0; i < charCount; i++) {
+		for(int i = 0; i < charCount.Length; i++) {
 			if (charCount[i] < 0) {
 				return result;
 			}
 		}
 		
-		for(int i = 0; i < numUsed; i++) {
+		for(int i = 0; i < numUsed.Length; i++) {
 			if(!numUsed[i]) {
 				// we'll try this number so two conditions
 				
@@ -31,7 +35,7 @@ public class Solution {
 				numUsed[i] = true;
 				
 				// condition #1 - the result has this number
-				RemoveCharCount(charCount, numUsed[i]);
+				RemoveCharCount(charCount, i);
 				string tempResult = OriginalDigits(charCount, numUsed);
 				
 				if (tempResult != string.Empty) {
@@ -41,7 +45,7 @@ public class Solution {
 				// condition #2 - the result doesn't have this number
 				
 				// restore chars first
-				AddCharCount(charCount, numUsed[i]);
+				AddCharCount(charCount, i);
 				tempResult = OriginalDigits(charCount, numUsed);
 				
 				if (tempResult != string.Empty) {
@@ -53,7 +57,7 @@ public class Solution {
 			}
 		}
 		
-		return result.Sort();
+		return result;
 	}
 	
 	public void AddCharCount(int[] charCount, int number) {
@@ -62,7 +66,7 @@ public class Solution {
 		}
 	}
 	
-	public bool RemoveCharCount(int[] charCount, int number) {
+	public void RemoveCharCount(int[] charCount, int number) {
 		foreach(var c in numStrings[number]) {
 			charCount[c - 'a']--;
 		}
