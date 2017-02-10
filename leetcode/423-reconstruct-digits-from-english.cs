@@ -8,6 +8,65 @@ public class Solution
         }
 
         int[] charCount = new int[26];
+
+        foreach (var c in s)
+        {
+            charCount[c - 'a']++;
+        }
+
+        string result = string.Empty;
+
+        var number = new List<Tuple<char, string, char>>();
+        number.Add(Tuple.Create<char, string, char>('z', "zero", '0'));
+        number.Add(Tuple.Create<char, string, char>('w', "two", '2'));
+        number.Add(Tuple.Create<char, string, char>('u', "four", '4'));
+        number.Add(Tuple.Create<char, string, char>('x', "six", '6'));
+        number.Add(Tuple.Create<char, string, char>('g', "eight", '8'));
+        number.Add(Tuple.Create<char, string, char>('o', "one", '1'));
+        number.Add(Tuple.Create<char, string, char>('t', "three", '3'));
+        number.Add(Tuple.Create<char, string, char>('f', "five", '5'));
+        number.Add(Tuple.Create<char, string, char>('s', "seven", '7'));
+        number.Add(Tuple.Create<char, string, char>('i', "nine", '9'));
+
+        foreach(var map in number)
+        {
+            int count = charCount[map.Item1 - 'a'];
+
+            if (count > 0)
+            {
+                result += new string(map.Item3, count);
+
+                for(int i = 0; i < count; i++)
+                {
+                    RemoveCharCount(charCount, map.Item2);
+                }
+            }
+        }
+
+        char[] resultChar = result.ToArray();
+        Array.Sort(resultChar);
+        return new string(resultChar);
+    }
+    
+    public void RemoveCharCount(int[] charCount, string str)
+    {
+        foreach (var c in str)
+        {
+            charCount[c - 'a']--;
+        }
+    }
+}
+
+public class BackTrackSlowSolution
+{
+    public string OriginalDigits(string s)
+    {
+        if (s == null || s == string.Empty)
+        {
+            return string.Empty;
+        }
+
+        int[] charCount = new int[26];
         bool[] numUsed = new bool[10];
 
         foreach (var c in s)
