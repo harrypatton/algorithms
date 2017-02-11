@@ -21,7 +21,7 @@ It means we add the battleship whenever we reach the end.
 
 Easy algorithm
 
-```csharp
+```C#
 public class Solution {
     public int CountBattleships(char[,] board) {
         int result = 0;
