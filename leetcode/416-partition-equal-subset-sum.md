@@ -32,3 +32,6 @@ The above solution works fine but of course it is not optimal per discussion pag
 	* we need one array to save values for left column. 
 	* We also need another array to save values for current column. (we cannot reuse previous one because it may conflict with current values)
 5. Top to down and then left to right.
+
+## Learning
+1. After checking discussion page, I found that we can use only one array instead of two in my solution. The key is, check from sum to 0, because we'll update current element and it will never be used in the rest of iteration.
