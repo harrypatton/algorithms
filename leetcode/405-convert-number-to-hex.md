@@ -19,4 +19,4 @@ Here's a new solution I think it is better,
 1. When convert `int` to `char`,  it needs `explicit cast`.
 2. Be careful about edge scenarios.
 3. Instead of using `List<char>`, we can just use string `+ operator`. It would avoid the reverse in the end and performance is still good because of the small size of result.
-4. Instead of using hardcode `8 loop count`, we just use `while (num > 0)` to reduce the check inside the loop.
+4. Instead of using hardcode `8 loop count`, we just use `while (num != 0 and count < 8)` to reduce the check inside the loop.
