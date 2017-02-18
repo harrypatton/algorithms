@@ -18,5 +18,10 @@ We cannot use original solution because each check is O(n+m). The best way is ha
 
 It may take a while to set up hash table but it is worth it. Another way could be, still use original solution but use a hash table to save the result. Every time check next input, check hash table first. Given that the `K>1B`, it doesn't make any difference.
 
+**Update**: it doesn't work because t could have `500k` length so the total number of subsequences could have `2^500k` and hash table wouldn't help.
+
+It has to use binary search. First get a new data structure to save each char (because it is lower case English letter) and its corresponding indexes. After that iterate `s`, and find the min value in the index list but the value should be greater than previous min value.
+
 ## Learning
 1. As I always mention, it is delightful to see cleaner code in discussion page:). People are smart.
+2. See binary search for follow-up question.
