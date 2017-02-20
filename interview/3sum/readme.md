@@ -48,8 +48,10 @@ There are a few solutions for this problem,
 
 # 4-Sum
 **Problem**: find if the sum of 4 elements in an array is equal to a target value.
-
-**Solution**: separate the array into 2 partitions and use hash table to save all possible 2-sum.
+**Solution**: similar to 3-Sum. Sort the array and iterate. For each element, find 3 sum in the rest. Time: O(n^3).
 
 # K-Sum
 **Problem**: find if the sum of `k` elements in an array is equal to a target value.
+
+#Learning
+1. when code 3-sum problem, it is cleaner to merge 2-sum method in the same function. E.g., solution in [discussion page](https://leetcode.com/problems/3sum-closest/?tab=Solutions).
