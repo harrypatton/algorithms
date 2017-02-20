@@ -18,7 +18,7 @@
             result.AddRange(CombinationSum(candidates, startIndex + 1, target));
 
             // result including first element
-            var subResult = CombinationSum(candidates, startIndex + 1, target - candidates[startIndex]);
+            var subResult = CombinationSum(candidates, startIndex, target - candidates[startIndex]);
             foreach (var list in subResult) {
                 list.Insert(0, candidates[startIndex]);
             }
