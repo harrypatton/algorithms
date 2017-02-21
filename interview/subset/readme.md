@@ -8,39 +8,6 @@ source: https://leetcode.com/problems/subsets/?tab=Description
 	* empty subset is part of the answer.
 	* recursion exit: empty subset. **Learning**: the condition is still tricky and hard to understand.
 
-```csharp
-public class Solution {
-    public IList<IList<int>> Subsets(int[] nums) {
-        if (nums == null) {
-            return new List<IList<int>>();
-        }
-        
-        return Subsets(nums, 0);
-    }
-    
-    public IList<IList<int>> Subsets(int[] nums, int start) {
-        var result = new List<IList<int>>();
-        
-        if (start >= nums.Length) {
-            result.Add(new List<int>());
-        }
-        
-        if (start <= nums.Length - 1) {
-            var subResult = Subsets(nums, start + 1);            
-            result.AddRange(subResult);
-            
-            foreach(var list in subResult) {
-                var newList = new List<int>(list);
-                newList.Insert(0, nums[start]);
-                result.Add(newList);
-            }
-        }
-        
-        return result;
-    }
-}
-```
-
 *  **Iteration**
 	* when iterate on first element, the result is `[], [0]`.
 	* move to next element `[1]`, we keep the result and then add other results by adding `[1]` to every subset. It becomes `[], [0], [1], [0, 1]`
@@ -48,26 +15,13 @@ public class Solution {
 * **Backtracking**:  `looking for a solution with better explanation.` This is a good link: http://math.stackexchange.com/questions/1689197/using-backtracking-algorithm-to-determine-all-the-subsets-of-integers
 * **Bitmap**: use bitmap to indicate if the number is selected or not.
 
-```csharp
-    public class Solution {
-        public IList<IList<int>> Subsets(int[] nums) {
-            if (nums == null) {
-                return new List<IList<int>>();
-            }
+## 90 - Subsets II
+source: https://leetcode.com/problems/subsets-ii/?tab=Description
 
-            // init the result
-            var result = new IList<int>[(int)(Math.Pow(2, nums.Length))];
-            for (int i = 0; i < result.Length; i++) {
-                result[i] = new List<int>();
+Given a collection of integers that might contain **duplicates**, `nums`, return all possible subsets. The solution set must not contain duplicate subsets.
 
-                for (int j = 0; j < nums.Length; j++) {
-                    if (((i >> j) & 1) == 1) {
-                        result[i].Add(nums[j]);
-                    }
-                }
-            }
-
-            return result;
-        }
-    }
-```
+### Analysis
+1. sort the collections so we can handle duplicate numbers efficiently.
+2. **Solution - Backtracking** - when pick up next element, we need to consider duplicate ones.
+	* it is a special case. Assume [k, k, k, k1, k2, k3 ...]. After calculate the result for [k1, k2, k3], we just add one k to each subset, 2Ks to each subset, and then 3Ks to each subset.
+3. **Iterative** - sort the algorithm first. And then the same idea as backtracking solution - when iterate over the element, calculate how many duplicates they have, and then add one k to each subset, 2Ks to each subset, ..., until all duplicates. (I wrote the code at once. good.)
