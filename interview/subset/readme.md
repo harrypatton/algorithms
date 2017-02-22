@@ -20,8 +20,23 @@ source: https://leetcode.com/problems/subsets-ii/?tab=Description
 
 Given a collection of integers that might contain **duplicates**, `nums`, return all possible subsets. The solution set must not contain duplicate subsets.
 
-### Analysis
+### Solutions
 1. sort the collections so we can handle duplicate numbers efficiently.
 2. **Solution - Backtracking** - when pick up next element, we need to consider duplicate ones.
 	* it is a special case. Assume [k, k, k, k1, k2, k3 ...]. After calculate the result for [k1, k2, k3], we just add one k to each subset, 2Ks to each subset, and then 3Ks to each subset.
 3. **Iterative** - sort the algorithm first. And then the same idea as backtracking solution - when iterate over the element, calculate how many duplicates they have, and then add one k to each subset, 2Ks to each subset, ..., until all duplicates. (I wrote the code at once. good.)
+
+## 40 - Combination Sum II
+source: https://leetcode.com/problems/combination-sum-ii/?tab=Description
+
+**Problem**: given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+
+1. Each number in C may only be used `once` in the combination.
+2. All numbers (including target) will be positive integers.
+3. The solution set must not contain duplicate combinations.
+
+### Solutions
+1. **DP**: it is easy to calculate if any combination has the sum, but a little tricky to get the result. I'll revisit this part.
+2. **Backtracking**: the most straightforward solution for me. Just be careful about two things
+	* when sum is greater than target, we should break the path (otherwise timeout).
+	* for duplicate numbers, just calculate the first one and skip others.
