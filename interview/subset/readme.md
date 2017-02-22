@@ -40,3 +40,42 @@ source: https://leetcode.com/problems/combination-sum-ii/?tab=Description
 2. **Backtracking**: the most straightforward solution for me. Just be careful about two things
 	* when sum is greater than target, we should break the path (otherwise timeout).
 	* for duplicate numbers, just calculate the first one and skip others.
+
+## 216 - Combination Sum III
+source: https://leetcode.com/problems/combination-sum-iii/?tab=Description
+
+Find all possible combinations of `k` numbers that add up to a number `n`, given that `only numbers from 1 to 9` can be used and each combination should be `a unique set of numbers`.
+
+**note**: each number can be used at most once.
+
+### Solutions
+1. **Backtracking**
+	* add first one element to the path and then check the remaining for other numbers.
+	* when numbers exceed `k` or target exceeds, break current path.
+	* Update - I wrote the code and passed in a short time.
+
+## 377 - Combination Sum IV
+source: https://leetcode.com/problems/combination-sum-iv/?tab=Description
+
+Given an integer array with all positive numbers and no duplicates, find the number of possible combinations that add up to a positive integer target.
+
+* a number can picked up multiple times.
+* order matters. [1, 2], [2, 1] are different combinations.
+
+The problem just needs a count instead of all of the combinations.
+
+### Solutions
+DP is good for aggregated result or one of results; backtracking is good to get all results. In this case, we just need to get the count, so we can try DP.
+
+1. f(n-1, sum) is the result. Now consider new element, the total is `f(n-1, sum) + f(n-1, sum-current_value)`. Unfortunately this one doesn't count for different sequences.
+
+**Update** - here're the solutions after reading discussion page,
+
+1. **recursion** - the last element in each combination could be any of the element, so `result(target) = result (target - e1) + result(target - e2) + result(target - e3)`.
+	* base: result(0) = 1. it means there is only one way to get target 0.
+2. **DP** - it is based on recursion solution. We use 2d matrix. Row: [1, target], Column: numbers; column means the number of combinations ending with that number which has the sum of value in Row.
+	* init: `cache[num[i], i] = 1`
+	* for each row target and number i, `cache[target, i] = cache[target - nums[i], 0] + cache[target - nums[i], 1] + cache[target - nums[i], 2] ... `.
+	* **Update**, we can use a single array to do the work, cache[1..target]. 
+		* init: for each number, `cache[0] = 1`, so when number is equal to target, it returns 1.
+		* Go through the cache. `cache[target] += cache[target - nums[0]] + cache[target - nums[1]] + cache[target - nums[2]] + ...`. 
