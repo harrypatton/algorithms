@@ -48,3 +48,26 @@ Top topic in `Discussion Page` also shows another solution,
 1. when treat # as leaf node, `leaf node = 1 + non-leaf node` because of the full-balance tree property.
 2. scan the string, if the condition is meet, break the loop.
 3. If we reach the end and also meet the condition, it is valid.
+
+# 297 - Serialize and Deserialize Binary Tree
+## Pre-order with parenthesis
+I can use parenthesis for left and right sub trees. Here's a few example,
+
+1. A single node 10, the string is 10.
+2. A root node 10 with left 2 and right 5, the string is 10(2)(5)
+3. A root node 10 with left 2 only. the string is 10(2)()
+4. A root node 10 with right 5 only. the string is 10()(5)
+5. A root node 10 with left 2 and right 7. Left 2 has left 3 and right 5. the string is 10(2(3)(5))(7)
+
+Both ways can use recursion to do the work.
+
+**Update**: my solution is accepted but not optimal. It has to keep scanning the string to find open/close brackets.
+
+## Pre-order with full balance tree
+This solution is from top #1 in discussion page. 
+
+1. Use pre-order to traverse the tree. When node is null, use "x" as the string. I can use empty string here.
+2. Each node is separated by a comma. 
+3. When deserialize the string, it is interesting to know that it would stop when left-tree is complete. Continue to scan the rest of array, it would complete the right sub-tree.
+
+In my solution, I use `ref` keyword with less readable. In `discussion page`, they use `queue` to avoid that issue, but `queue` itself is an overhead.
