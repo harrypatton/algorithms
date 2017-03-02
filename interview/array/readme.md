@@ -15,3 +15,7 @@ source: https://leetcode.com/problems/longest-substring-without-repeating-charac
 		* when end step reach after the end, we can quite.
 
 **Update**: yes, I get one-time pass with bug-free code.
+
+## Learning
+1. [Discussion page](https://leetcode.com/articles/longest-substring-without-repeating-characters/) has awesome solutions to learn. It uses a Dictionary to store the char index. When the char is repetitive, it uses that index value to quickly skip.
+2. we don't have to set a variable for the counter, because it is equal to (end - start + 1).
