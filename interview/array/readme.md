@@ -32,9 +32,11 @@ Given a list of non negative integers, arrange them such that they form the larg
 	* If one digit is missing, the other one with a bigger second digit which is also greater than first digit is bigger. E.g, `3, 34 = 343`, `3, 32 = 332`, 
 		* if the 3rd digit is the same, we have to keep checking the rest. `3, 332 = 3332 `, `3, 334 = 3343`
 3. We just need to sort based on logic above and combine them together.
-4. **Update** - the above analysis is too tricky when the remaining letter is the same as first one. See examples below. I end up with a cheating way - just check `string.Compare(numStr1 + numStr2, numStr2 + numStr1)`. The result is accepted by the system.
+4. **Update** - the above analysis is too tricky when the remaining letter is the same as first one. See examples below. 
 
 ```
 32, 323 => 323-32
 343, 3433 => 34-343
 ```
+I end up with a cheating way - just check `string.Compare(numStr1 + numStr2, numStr2 + numStr1)`. The result is accepted by the system.
+
