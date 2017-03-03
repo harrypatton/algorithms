@@ -40,3 +40,61 @@ Given a list of non negative integers, arrange them such that they form the larg
 ```
 I end up with a cheating way - just check `string.Compare(numStr1 + numStr2, numStr2 + numStr1)`. The result is accepted by the system.
 
+#LC33 - Search in Rotated Sorted Array
+source: https://leetcode.com/problems/search-in-rotated-sorted-array/?tab=Description
+
+**Problem** - find an element in the array. If not found, return -1. Assume no duplicate exists in the array.
+
+## Analysis
+1. Use binary search idea. Every time we should cut half elements so the time complexity is supposed to be O(logn).
+2. Draw a picture to get better idea. Select the middle. half element will go to normal binary search and the rest will call ~~the same function recursively~~.
+3. Feel easier when no duplicate elements in the array:).
+4. **Update** - it is tricky to get edge cases right.
+5. **Update 2** - not sure why I was think about recursion. Binary search doesn't need recursion - just move two pointers.
+
+Reset Analysis
+
+1. List all scenarios to consider,
+	* one element
+	* two elements with descending order
+	* ascending order without rotation
+	* rotate in the first half
+	* rotate in the second half.
+2. First of all we need to get middle. If middle == target, it is good.
+3. Divided into scenarios.  
+	* if middle > start, it is 3+ ascending array, or rotation point is in 2nd half.
+		* if target is in `[start, middle)`, `middle - 1` becomes `end`.
+		* otherwise go to the right.
+	* if middle < start, its rotation point is in the first half.
+		* if target is in `(middle, end]`, `middle + 1` becomes `start`.
+		* otherwise go to the left.
+	* if middle == start, it is 1-element array, or 2-elements array. Which pointer to move?
+		* it doesn't matter for 1-element array because pointers would become invalid.
+		* for 2-elements array, we can move to right.
+
+**Update**: one time bug-free pass.
+
+#LC153 - Find Minimum in Rotated Sorted Array
+source: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/?tab=Description
+
+The array doesn't have duplicate numbers. The problem is to look for the pivot element (i.e., the min value).
+
+## Analysis
+1. Still need to care about all scenarios.
+2. Unlike finding a target, when do we quite when find the min?
+	* when middle > end, go to right (`excluding` the middle)
+	* when middle < end, go to left (`including` the middle)
+	* when middle == end, it is pivot point.
+
+**Update**: be careful about the edge cases. Still took me 2 times to fix the issue.
+
+#LC81 - Search in Rotated Sorted Array II
+source: https://leetcode.com/problems/search-in-rotated-sorted-array-ii/?tab=Description
+
+In this case, the array may contain duplicate numbers.
+
+## Analysis
+1. Need to list a few scenarios like previous scenario.
+2. The key thing is, if start == middle == end, we cannot tell which direction to go. so we move one step for both pointers. 
+
+**Update**: I missed #2 in the first time but quickly found it after running the test case.
