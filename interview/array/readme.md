@@ -98,3 +98,12 @@ In this case, the array may contain duplicate numbers.
 2. The key thing is, if start == middle == end, we cannot tell which direction to go. so we move one step for both pointers. 
 
 **Update**: I missed #2 in the first time but quickly found it after running the test case.
+
+#LC154 - Find Minimum in Rotated Sorted Array II
+source: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/?tab=Description
+
+The array may contain duplicate elements; Other than that, it is the same LC153.
+
+## Analysis
+1. Just need to be careful about the edge cases; other than that, it is easy to write. I fixed one edge case and passed the test.
+
