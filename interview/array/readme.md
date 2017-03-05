@@ -88,22 +88,90 @@ The array doesn't have duplicate numbers. The problem is to look for the pivot e
 
 **Update**: be careful about the edge cases. Still took me 2 times to fix the issue.
 
-#LC81 - Search in Rotated Sorted Array II
-source: https://leetcode.com/problems/search-in-rotated-sorted-array-ii/?tab=Description
+# Permutation of an Array of Arrays
+source: http://blog.gainlo.co/index.php/2017/01/05/uber-interview-questions-permutations-array-arrays/
 
-In this case, the array may contain duplicate numbers.
+Given a list of array, return a list of arrays, each array is a combination of `one element in each given array`. One example,
 
-## Analysis
-1. Need to list a few scenarios like previous scenario.
-2. The key thing is, if start == middle == end, we cannot tell which direction to go. so we move one step for both pointers. 
-
-**Update**: I missed #2 in the first time but quickly found it after running the test case.
-
-#LC154 - Find Minimum in Rotated Sorted Array II
-source: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/?tab=Description
-
-The array may contain duplicate elements; Other than that, it is the same LC153.
+```
+input: [[1, 2, 3], [4], [5, 6]]
+output: [[1, 4, 5], [1, 4, 6], [2, 4, 5], [2, 4, 6], [3, 4, 5], [3, 4, 6]]
+```
 
 ## Analysis
-1. Just need to be careful about the edge cases; other than that, it is easy to write. I fixed one edge case and passed the test.
+1. The new array pick one element from each array in original list.
+2. tricky things or edge cases.
+	* what about duplicate elements? need to clarify. If we need to handle duplicates, we need to sort the array and add unique elements (or use hashset to check duplicates).
+	* does the order inside the result array matter? E.g., [1, 4, 5], how about [1, 5, 4]? Another way to ask the question, is the nth element in final array always coming from nth array in original list?
 
+### Recursion
+Permutation is always each to use recursion or iterative method. Say we have the answer for f(n-1), it is easy to get f(n) by inserting every element to previous result.
+
+### Backtracking
+I should practice that too.
+
+### Better Solution
+I haven't found out yet.
+
+### Learning
+1. The source needs improvement on quality. It is not as good as LeetCode.
+2. If we just need to print out the result instead of return, we can use backtracking to save the memory.
+
+#LC22 - Generate all Parentheses
+source: https://leetcode.com/problems/generate-parentheses/?tab=Description
+
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses. For example, given n = 3, a solution set is:
+```
+[
+  "((()))",
+  "(()())",
+  "(())()",
+  "()(())",
+  "()()()"
+]
+```
+
+## Analysis
+1. Not an intuitive way to come up with a solution.
+2. Brutal force - n pairs have 2n length. Open parentheses could be any random n positions. Total is C(2n, n). Given one string, it takes O(n) to check if valid. Not efficient.
+
+### Iterative/DP/Recursion
+Say we have the result for `f(n-1)`, given a new pair, how to update it?
+
+1. In the first time, I cannot find a good solution on that. I don't know how to denote or find a sub-problem formula. I have to check the answer.
+2. I always think of DP, but in this case, to get all results, I should have tried backtracking. Apparently it is very easy to use backtracking. I got one-time bug free pass; but it is not very intuitive to understand.
+
+# Maximum Sum of Two Non-adjacent Elements
+Source: http://blog.gainlo.co/index.php/2016/12/02/uber-interview-question-maximum-sum-non-adjacent-elements/
+
+Given an array of integers, find a maximum sum of **two** non-adjacent elements. `For example, inputs [1, 0, 3, 9, 2] should return 10 (1 + 9).`
+
+## Analysis
+1. Because it requires non-adjacent elements, so we cannot sort.
+2. Brutal Force - check each pair and record the max. time complexity: O(n^2)
+3. Optimization - we can also use one time iteration to find the result. 
+	* f(n-2) means the max element so the max sum for current element is f(n-2) + array[n].
+	* f(n-1) is Math.Max(f(n-2), array[n-1]).
+	* Init the value based on first and second element, and then calculate starting from the third one.
+	* If array is less than 3 element, we return int.MinValue.
+4. Be careful about the edge cases.
+
+##Learning##
+1. I can easily write down the code but I don't clarify the question first
+	* Is it any random number of non-adjacent elements or two elements? 
+	* What if one element is positive and others are negative?
+2. When I write the code, I wrongly assume it means 2 elements but the source shows 2 or more elements, so I keep as is and write a new question below.
+
+# Maximum Sum of any Non-adjacent Elements
+source: http://blog.gainlo.co/index.php/2016/12/02/uber-interview-question-maximum-sum-non-adjacent-elements/
+
+Given an array of integers, find a maximum sum of **any** non-adjacent elements. `For example, inputs [1, 0, 3, 9, 2] should return 10 (1 + 9).`
+
+## Analysis
+1. No intuitive way to do brutal force. 
+2. Because it requests max value, we can use DP; otherwise use backtracking.
+	* **formula**:  `f(n) = Math.Max(f(n-2) + current_element, f(n-1))`.  It is obvious.
+	* **base**: f(0) = array[0], f(1) = Math.Max(array[0], array[1]).
+
+## Learning
+1. It is easy to write down the code; but be careful it doesn't work for negative number. When consider negative numbers, the **formula** should be `f(n) = Math.Max(currentElement, f(n-2) + current_element, f(n-1))`. Just add currentElement to the list.
