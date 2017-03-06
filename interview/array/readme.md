@@ -175,3 +175,63 @@ Given an array of integers, find a maximum sum of **any** non-adjacent elements.
 
 ## Learning
 1. It is easy to write down the code; but be careful it doesn't work for negative number. When consider negative numbers, the **formula** should be `f(n) = Math.Max(currentElement, f(n-2) + current_element, f(n-1))`. Just add currentElement to the list.
+
+# LC283 - Move Zeroes
+source: http://blog.gainlo.co/index.php/2016/11/18/uber-interview-question-move-zeroes/
+
+**Problem**: modify the array by moving all the zeros to the end (right side). The order of other elements doesn’t matter.
+
+`Extention`: move zeros and still keep the orders of other elements.
+
+## Analysis
+1. Extra array - get another array, copy non-zero elements first and then set the rest as zero. `Time O(n)` and `Space O(n)`.
+2. `In-Place`:  something similar to quick sort. Pivot elements. Quick sort is not a stable algorithm so it cannot preserve the order.
+	* set two pointers at start and end.
+	* `while (start < end)`
+		* while (start < end && start == non-zero), start++;
+		* while (end > start && end == zero), end--;
+		* if (start < end && start == zero && end== non-zero), swap the elements, start++ and end--;
+	* Here's another way to write the while code block, `while (start < end)`
+		* if (start == non-zero) start++; continue;
+		* if (end == zero), end--; continue;
+		* swap start and end; move both pointers;
+	* The 2nd `while code block` is cleaner than the first one.
+
+##Extension
+What can we do to preserve the order? It is an easy problem to just move non-zero element; the rest would be zero.
+
+1.  Set a pointer `p` to a position which will be set with non-zero element, i.e., `p = 0`.
+2. Iterate over the whole array
+	* if current element is non-zero element (`be careful about the edge case`)
+		* `if p != index,  array[p] = array[index]`; otherwise don't set the same value.
+		* move pointer `p` one step.
+	* if current element is zero, do nothing. 
+3. After the iteration, starting with `p`, set the rest of arrays to zeros.
+
+**Update**: one time bug free code passed.
+
+# Weighted Random Number
+source: http://blog.gainlo.co/index.php/2016/11/11/uber-interview-question-weighted-random-numbers/
+
+**Problem**: Write a function that returns values randomly, according to their weight. Example. 
+```
+Suppose we have 3 elements with their weights: A (1), B (1) and C (2). 
+The function should return A with probability 25%, B with 25% and C with 50% based on the weights.
+```
+
+## Analysis
+1. I rarely see this type of problem.
+2. The answer should be a function and run it a few times, it should generate all elements with expected probability.
+3. Add all weights to a total and generate a number `k` between `1` and `sum`. Choose ceiling on random.Next(0, sum).
+4. Iterate over the element and reduce `k` by the element weight. if `k <= 0`, current element is the output.
+
+### Questions
+1. How to validate the algorithm is correct?
+2. Do we need perfect random? If we use built-in library `Random class`, it never happen. Need to clarify with interviewer.
+
+## Learning
+1. Weight could be double type. Do you think about that?
+2. My original algorithm is correct (the same solution in source). Time complexity O(n) and space O(1). Can we improve time complexity?
+	* O(n) seems hard without space.
+	* O(logn) seems doable due to binary search. Instead of saving the weight, I can store the sum of weight until that element.
+3. Be careful about edge cases. The random.Next will return int type. In our case, we can always find the integer. 
