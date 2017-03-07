@@ -235,3 +235,33 @@ The function should return A with probability 25%, B with 25% and C with 50% bas
 	* O(n) seems hard without space.
 	* O(logn) seems doable due to binary search. Instead of saving the weight, I can store the sum of weight until that element.
 3. Be careful about edge cases. The random.Next will return int type. In our case, we can always find the integer. 
+
+# LC20 - Valid Parentheses
+source
+* http://blog.gainlo.co/index.php/2016/09/30/uber-interview-question-delimiter-matching/
+* https://leetcode.com/problems/valid-parentheses/?tab=Description
+
+It is also the Uber - Delimiter Matching problem.
+
+**Problem**: Write an algorithm to determine if all of the delimiters in an expression are matched and closed. For example,
+```
+“{ac[bb]}”, “[dklf(df(kl))d]{}” and “{[[[]]]}” are matched. But “{3234[fd” and {df][d} are not. The question has been asked by Uber recently and is expected to be solved quickly.
+```
+
+## Analysis
+1. **Stack**: It is easy to solve using stack for open-close delimiter or parenthesis. 
+	* When see an open delimiter, push to stack
+	* when see a close one, check if peek element is a closing matched one.
+		* If yes, pop it up.
+		* If no, return - we know it is an invalid expression.
+	* edge case
+		* when iteration is complete, check any remaining element.
+		* ignore letter during iterating.
+2. Function signature
+
+```
+public bool IsValid(string str);
+```
+
+## Learning
+1. Easy code but I submitted twice because I didn't run invalid scenario before commit the code. When encounter close delimiter, I need to check if stack is empty before popping up the top element.
