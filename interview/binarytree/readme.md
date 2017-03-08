@@ -111,3 +111,18 @@ The problem is much easier for BST.
 2. When exit the loop, current root value is the LCA. It should cover common scenarios and also edge scenairo like one of node is ancestor.
 
 **Update**: my 4-line code accepted at once. cool!
+
+# LC257 - Binary Tree Paths
+source: https://leetcode.com/problems/binary-tree-paths/?tab=Description
+
+The problem needs to get the node path for all leaf nodes.
+
+## Analysis
+1. **Recursion** (or DFS)
+	* base: when current node is leaf node, add the result.
+	* formula: scan left tree and then right tree. We need to pass a prefix path to every function call.
+2. **Iterative** (or BFS): we need a queue to handle it. Seems complicated though. 
+
+## Learning
+1. when doing post-order traversal, remember it is very similar to pre-order. A mirror with some adjustment.
+2. Be careful about the edge case like single element.
