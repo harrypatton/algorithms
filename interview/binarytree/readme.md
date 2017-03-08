@@ -71,3 +71,43 @@ This solution is from top #1 in discussion page.
 3. When deserialize the string, it is interesting to know that it would stop when left-tree is complete. Continue to scan the rest of array, it would complete the right sub-tree.
 
 In my solution, I use `ref` keyword with less readable. In `discussion page`, they use `queue` to avoid that issue, but `queue` itself is an overhead.
+
+#Lowest Common Ancestor II
+Source
+
+* http://blog.gainlo.co/index.php/2016/07/06/lowest-common-ancestor/
+* lc236: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/?tab=Description
+
+*Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.*
+
+According to the definition of LCA on Wikipedia: `The lowest common ancestor is defined between two nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).`
+
+## Analysis
+1. **compare node path** - given a node, it is easy to get the path up to root node. If we save two node paths in arrays and then compare from the end. The last common element is the LCA. Time O(logn) and space O(logn). 
+	* what if tree node doesn't have a pointer to parent? We have to use backtracking to find the path. Time O(n). 
+2. **in-order traversal**: if both nodes appear before the root, we know they're at left tree; if both nodes appear after the root, they're at right tree; otherwise the LCA is root node. We do exactly the same thing for sub-tree. Time complexity is O(n). 
+
+**Update**: I need to rethink this problem. Cannot find a good way for now.
+
+1. It turns out to be a simple solution but a little bit tricky.
+2. It uses recursion here.
+3. If the root and subtrees contains both nodes, it returns LCA.
+4. If the root and subtrees contains only one of them, it returns the node.
+5. if the root and subtrees don't contain any of the nodes, it returns null.
+6. so the base is `if (root == null || root == node1 || root == node2), return root.`
+7. After that, call the same function on left subtree and right subtree. If one of the result is null, we return the other result; if both are not null, it means each subtree has one of them, then root is the LCA.
+
+# LC235 - Lowest Common Ancestor I
+source: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree
+
+The difference is we're given a BST (binary search tree).
+
+## Analysis
+The problem is much easier for BST. 
+
+1. We can set a while loop when both nodes are greater than root or less than root.
+	* if greater, set root to root.Right.
+	* otherwise, set root to root.Left.
+2. When exit the loop, current root value is the LCA. It should cover common scenarios and also edge scenairo like one of node is ancestor.
+
+**Update**: my 4-line code accepted at once. cool!
