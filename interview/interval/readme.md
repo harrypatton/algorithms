@@ -31,3 +31,30 @@ Let’s start with an example. Suppose we use interval (start, end) to denote th
 	* one pointer to start end array and the other for end time array.
 	* if start < end, we need a new room and move to next start.
 	* if start > end, we know there is a room complete (because there's an end) so we don't need new room; but we need to move end to next position. `end` means next `earliest released room`.
+
+#LC56 - Merge Intervals
+source: https://leetcode.com/problems/merge-intervals/?tab=Description
+
+*Given a collection of intervals, merge all overlapping intervals.*
+
+For example,
+```
+Given [1,3],[2,6],[8,10],[15,18],
+return [1,6],[8,10],[15,18].
+```
+
+## Analysis
+1. Sorting is a great tool for interval problem.
+2. Sort by start point and then iterate over the pairs.
+3. If `current.End <= next.Start`, we should merge the pair so new pair becomes `[current.Start, next.End]`; **else** we reach a separate pair, so just need to add it to the result. 
+5. Edge cases
+	* in for-loop, let's compare current one with previous one.
+	* if i == 0, initialize the result pair.
+	* if i > 0, check current one with the result pair. 
+		* if `current.Start <= resultPair.End`, update result pair end. **Update**: there's an edge case that the resultPair.End is bigger than current.End, so when merge, it actually does nothing. I made the mistake in the first submission. 
+		* otherwise, add result pair to result list and initialize one to current pair.
+	* After for-loop, we need to add result pair to result list.
+	* Edge cases must be very careful.
+
+## Learning
+1. I use a `resultPair` to store previous result, but we can just use two variables `start` and `end` to avoid the object creation.
