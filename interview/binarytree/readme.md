@@ -126,3 +126,44 @@ The problem needs to get the node path for all leaf nodes.
 ## Learning
 1. when doing post-order traversal, remember it is very similar to pre-order. A mirror with some adjustment.
 2. Be careful about the edge case like single element.
+
+# 2nd largest element in BST
+source: http://blog.gainlo.co/index.php/2016/06/03/second-largest-element-of-a-binary-search-tree/
+
+*given a BST, find the second largest element*
+
+## Analysis
+1. **in-order traversal**: iterate over the tree and get the second last one.
+	* Option 1: we can use an array to store the result. Both time and space are O(n).
+	* Option 2: we can use two pointers `previous` and `current` to save space. When iterate a new element, we use `previous` to save current element.
+2. **recursion**
+	* base: if right sub-tree has only one child, the result is root.
+	* if right sub-tree is empty, find the largest element in left sub-tree, i.e., the most right element is the largest one.
+	* if right sub-tree is not empty, find the 2nd largest element in right sub-tree.
+	* Time complexity: O(logn) average. Worst case is still O(n).
+
+##Follow-up question: get Kst largest element
+1. **in-order traversal**: this solution still works. One iteration to check how many nodes we have. The 2nd iteration just reach the (`count + 1 - k`) element. E.g., when k == 1, we need to iterate until `count`.  Time O(n).
+2. **recursion**: I cannot find a good sub-problem formula.
+
+#LC230 - Kth Smallest Element in a BST
+source: https://leetcode.com/problems/kth-smallest-element-in-a-bst/?tab=Description
+
+## Analysis
+1. We know in-order traversal is actually visiting from smallest to largest in order. 
+2. **copy array**: we can traverse and save the result in the array and then return the kth element.
+2. **in-place counter**: when iterate the tree, we count how many elements we see. When counting kth, we found the element. Time O(n).
+
+## Follow up
+What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine? The best would be O(1).
+
+1.  Maintain a mini heap with k size. The result would be root node. Time O(1).
+2. Iterate the first kth element to set up mini heap.
+2. When add an new element to BST, 
+	* if less than current root node, add to mini heap. Time O(logn).
+	* otherwise do nothing.
+3. When delete an element in BST,
+	* if less than current root node, delete it in mini heap and add a new one.
+		* deletion: Time O(logn).
+		* the new one is the new kth element. Time O(n). (*we increased the time from O(logn)*)
+	* otherwise do nothing.
