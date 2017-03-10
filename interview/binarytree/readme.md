@@ -196,3 +196,4 @@ So there're **two solutions** for this problem,
 2. Recursion solution is a little bit hard to write.
 	* I need to use out parameters to return min and max of the tree.
 	* base condition: I use null node as the base condition. I think I can also use leaf node for that and make sure I never call the function with null node.
+3. It shows a cleaner way without using `out` parameter to do the work: https://discuss.leetcode.com/topic/7179/my-simple-java-solution-in-3-lines. 
