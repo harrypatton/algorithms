@@ -53,5 +53,40 @@ There are a few solutions for this problem,
 # K-Sum
 **Problem**: find if the sum of `k` elements in an array is equal to a target value.
 
+# Subarray with given sum
+source: http://blog.gainlo.co/index.php/2016/06/01/subarray-with-given-sum/
+
+The array has only positive numbers. Find a continuous subarray which sum is the target value.
+
+1. we can use two pointers.
+2. Another way is using accumulative sum. When current accumulative sum minus the target value, check if the hash table has the value. If yes, we found it; if not, add the latest accumulative sum in hash table.
+
+# Subarray with given sum II
+source: http://www.geeksforgeeks.org/find-subarray-with-given-sum-in-array-of-integers/
+
+in this case, the array may has nagetive numbers. The best solution would be using accumulative sum + hash table.
+
+# Subset with given sum III
+source: http://www.geeksforgeeks.org/dynamic-programming-subset-sum-problem/
+
+in this case, the array has only positive numbers. Find a subsequence which sum is the target value. Subsequence doesn't need to be continous.
+
+Simple DP problem. 
+
+# Subarrary with given sum IV
+source: https://en.wikipedia.org/wiki/Subset_sum_problem
+
+In this case, the array may have positive and negative numbers. 
+
+1. We can use DP
+2. The column range is [n, p]. `n` is the total sum of all negative numbers; `p` is the total sum of all positive numbers. The row range is the subarray [0, n].
+3. Finish first column and then move to next one.
+4. We can only one array instead of 2d array to save the cache result; however, be careful about the edge case.
+	* when current number is positive, let's calculate from bottom to top, so saving new value in the cache result will be not used by coming calculation.
+	* when current number is negative, calculate from top to down.
+	* we can use two arrays to alternatively save the cache but waste the memory.
+
+
 #Learning
 1. when code 3-sum problem, it is cleaner to merge 2-sum method in the same function. E.g., solution in [discussion page](https://leetcode.com/problems/3sum-closest/?tab=Solutions).
+2. If we need to return the subset or subarray, backtracking is the best way.
