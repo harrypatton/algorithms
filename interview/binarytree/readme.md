@@ -167,3 +167,32 @@ What if the BST is modified (insert/delete operations) often and you need to fin
 		* deletion: Time O(logn).
 		* the new one is the new kth element. Time O(n). (*we increased the time from O(logn)*)
 	* otherwise do nothing.
+
+#LC 98 - Validate Binary Search Tree
+source: https://leetcode.com/problems/validate-binary-search-tree/?tab=Description
+
+*Given a binary tree, determine if it is a valid binary search tree (BST).*
+
+Assume a BST is defined as follows:
+
+1. The left subtree of a node contains only nodes with keys **less than** the node's key.
+2. The right subtree of a node contains only nodes with keys **greater than** the node's key.
+3. Both the left and right subtrees must also be binary search trees.
+
+## Analysis
+1. Tree is a special data structure. Recursion is always a great solution to solve the problem.
+2. In this case, we can recursively call subtrees to validate if they are BST
+3. The base is, `max_left_sub_tree < root value < min_right_sub_tree`. It indicates that the function must return `max` and `min` to caller.
+	* in the function, we use ref parameters `max` and `min` to track them when visit the node. 
+4. **Question**: is it a BST if in-order traversal is ordered? Yes it is.
+
+So there're **two solutions** for this problem,
+
+1. Recursion
+2. In-order traversal
+
+## Learning
+1. Edge cases: when root is null, the answer returns true. I assume it is false without clarification. 
+2. Recursion solution is a little bit hard to write.
+	* I need to use out parameters to return min and max of the tree.
+	* base condition: I use null node as the base condition. I think I can also use leaf node for that and make sure I never call the function with null node.
