@@ -47,3 +47,50 @@ Say you have an array for which the ith element is the price of a given stock on
 
 ## Learning
 * My original solution is clean. I learned something from discussion page and tried to combine the first element scenario with others. It brings a very tricky issue that is hard to discover. I should stick with original one.
+* This solution doesn't work for follow-up question like `allow at most k transactions`.
+* I don't like top discussion page solution which is too specific to the scenario. I like the 2nd one which is generalized for `k transaction`.
+
+#LC188 - Best Time to Buy and Sell Stocks IV
+source: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/?tab=Description
+
+*Say you have an array for which the ith element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete at most k transactions.*
+
+## Analysis
+* DP comes in mind quickly. 
+* Formula. **Update**: it might be wrong because Leetcode gives me timeout exception.
+	* `f(k, i)` means max profit in days `[0..i]` using `at most k transactions`. 
+	* How to calculate the number using subproblems? Choose the max of subresults below,
+		* Not selling on day `i`: use `f(k, i-1)`
+		* Selling on day `i`: previous buying day could be any day `j` in `[0..i-1]`.  The result is `Max(f(k-1, j) + prices[i] - prices[j])`.
+	* the edge case is very interesting.
+		* use `j` or `j-1` in `Max(f(k-1, j) + prices[i] - prices[j])`? I choose `j` to cover scenario like buy on first day and sell on last day.
+		* do we need 2d array, one array or two arrays to save the cache? It seems that we have to use two arrays to save the result to avoid overwriting.
+* Base
+	* f(k, 0) = 0: only one day, cannot sell the stock.
+	* f(0, i) = 0: no transaction allowed.
+
+Signature
+```
+public int GetMaxProfit(int[] prices, int k)
+```
+
+##Learning
+1. The DP solution shows time out so my formula might be wrong.
+2. The discussion page shows a similar DP solution but with a couple of tricks to reduce the time out. Check it out.
+
+#LC309 - Best Time to Buy and Sell Stock with Cooldown
+source: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/?tab=Description
+
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:
+
+* You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+* After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)
+
+##Analysis
+* let's say we have an array of price difference. 0, 2, 3, -2, 2, -1, -5, 3. Adding up the positive one? We have too chose one negative integer with one positive integer, because we cannot buy on the dropping day so we cannot get the profile on next day. 
+* I kind of get the idea but hard to put in implementation. I need to find a cleaner way to solve the problem.
+
+##Learning
+* I'll leave as is for now. 
