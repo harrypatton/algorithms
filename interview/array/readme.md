@@ -265,3 +265,34 @@ public bool IsValid(string str);
 
 ## Learning
 1. Easy code but I submitted twice because I didn't run invalid scenario before commit the code. When encounter close delimiter, I need to check if stack is empty before popping up the top element.
+
+
+# Duplicate Element in string Array
+source: http://blog.gainlo.co/index.php/2016/05/10/duplicate-elements-of-an-array/
+
+*Given an array of string, find duplicate elements.*
+
+## Analysis
+There're a few ways to handle it. We assume string comparison as O(1) operation.
+
+1. **Naive solution**: pick up one element and compare with others. Time O(n^2) and space O(1).
+2. **Sort and find duplicates**. When current element is not the same as previous one, it is a new element. Time O(nlogn) and Space O(1).
+3. **Use a hash set**. When element exists in hash set, it is duplicate; otherwise add to hash set. Time O(n), Space O(n).
+
+## Follow up - big array
+What if the array is too large to put in memory? Apparently, we have to store all those strings in files. Then how can we find duplicate elements?
+
+1. The array is very big so
+	* We cannot simply use sorting.
+	* We cannot use hashset because it is going to be big.
+2. **Update**: we can use external sorting and use #1 to solve the problem.
+	* sort two arrays and merge back to the disk. Keep the process until all data is sorted.
+3. The source also gives a **File Pivot** solution - somehow buckets these strings. Each bucket can fit into memory and there're no duplicates among buckets. The tricky thing is how to bucket them in good ways so that each can fix in. 
+4. The efficient is based on I/O instead of big O anymore. 
+
+## Follow up - distributed data
+What if the array is too large to fit in one node? We have to store all those strings in different nodes. How to find duplicate elements?
+
+1. Similar to external sorting. Sort all string on every single machine and then get a master machine to read one string from every machine. It is `n-way merging sort`; we can minimize the network communication cost by read a small chuck of data from one machine at once. 
+2. Partition - one machine owns one partition and other machines send data in that partition to that machine, so result from one machine is independent on others. The result is just a combination.
+3. Partition is better because if one node is down, it only impacts that partition. In `external sorting` solution, one node failure would block the system.
