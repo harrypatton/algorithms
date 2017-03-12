@@ -42,4 +42,4 @@ source: https://leetcode.com/problems/find-all-anagrams-in-a-string/?tab=Descrip
 			* if the letter exists in the 1st list and new count `> 0 && <= original count`, the `counter` add 1.
 	* After the first substring, we move one step at a time.
 
-** Update**: my solution O(n) passed the test; but the code is not clean at all. 
+** Update**: my solution O(n) passed the test; but the code is not clean at all. We just need one list and modify the counter based on some conditions.
