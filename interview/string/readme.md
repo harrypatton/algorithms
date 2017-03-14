@@ -22,7 +22,7 @@ For example, string “catn” needs one deletion to make it a valid word “cat
 
 **Update**: one time bug free code.
 
-#Find The Longest Substring With K Unique Characters
+# Find The Longest Substring With K Unique Characters
 source: http://blog.gainlo.co/index.php/2016/04/12/find-the-longest-substring-with-k-unique-characters/
 
 *Find the longest substring with K unique characters.*
