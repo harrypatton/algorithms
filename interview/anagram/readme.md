@@ -43,3 +43,31 @@ source: https://leetcode.com/problems/find-all-anagrams-in-a-string/?tab=Descrip
 	* After the first substring, we move one step at a time.
 
 ** Update**: my solution O(n) passed the test; but the code is not clean at all. We just need one list and modify the counter based on some conditions.
+
+#LC49 - Group Anagrams
+Source
+
+* https://leetcode.com/problems/anagrams/#/description
+* http://blog.gainlo.co/index.php/2016/05/06/group-anagrams/
+
+*Given a set of random string, write a function that returns a set that groups all the anagrams together.*
+
+For example, suppose that we have the following strings:
+“cat”, “dog”, “act”, “door”, “odor”
+
+Then we should return these sets: {“cat”, “act”}, {“dog”}, {“door”, “odor”}.
+
+##Analysis
+* Check if two strings are anagrams. There're two ways,
+	* To check if two strings are anagram, we use hash table to do the work. If the chars comes from a restricted charset (e.g., lower-case English letter), we can use array instead of hash table.
+	* Another way to check anagram is to sort the string and check if they are the same.
+* **Brutal force** - pick up every string and compare with others. O(n^2*m). m means anagram checking time (when use hash table or array).
+* **Sorting** - sort the string based on sorted value. It is O(mlogm*nlogn). m is the string length. After that O(n * m) to get the result.
+* **Dictionary** - if we use array to store each char counter, we can calculate a key string used in dictionary.  convert the 26-length array to string like, 0,0,0,2,1,3,.... Time complexity is O(n*m). Space O(m)
+
+Signature
+```
+public IList<IList<string>> GetGroups(IList<string> strings)
+```
+
+**Update** - dictionary solution is much easier to write than the sorting one. Bug free one time pass. 
