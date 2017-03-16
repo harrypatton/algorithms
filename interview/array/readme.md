@@ -323,3 +323,24 @@ Edge case:
 ## Learning
 1. funny - operator precedence. `x.y` > `(x)y` > `?:`
 2. I calculate start and end char by myself to save some memory; however, if we use a hard-code string array for the mapping, the code is better to maintain with few bugs. The memory cost is O(1).
+
+# LC67 - Add Binary
+Problem: *Given two binary strings, return their sum (also a binary string).*. [Source](https://leetcode.com/problems/add-binary/#/description)
+
+For example,
+```
+a = "11"
+b = "1"
+Return "100".
+```
+
+## Analysis
+1. Use two pointers and calculate from back to front. 
+2. Use a flag to indicate whether we have an overflow.
+3. Use StringBuilder to be more memory efficient.
+4. Edge cases to be careful,
+	* Empty string
+	* 1111 + 1
+
+## Learning
+1. code is easy to write but StringBuilder doesn't have Reverse() method. I have to do `StringBuilder -> string -> CharArray -> Reverse() -> ToArray -> string`. In interview, I'll call a method `Reverse` on `StringBuilder`. In work, I'll add an extension method.
