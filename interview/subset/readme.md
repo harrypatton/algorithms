@@ -3,7 +3,7 @@ source: https://leetcode.com/problems/subsets/?tab=Description
 
 **Problem**: given a set of distinct integers, return all possible subsets. The solution cannot return duplicate subsets.
 
-###Solutions
+### Solutions
 * **Recursion** - get all subsets based on `[1, n]`, and then extend the subsets by adding another subset (add `[0]` to every subset).
 	* empty subset is part of the answer.
 	* recursion exit: empty subset. **Learning**: the condition is still tricky and hard to understand.
@@ -79,3 +79,23 @@ DP is good for aggregated result or one of results; backtracking is good to get 
 	* **Update**, we can use a single array to do the work, cache[1..target]. 
 		* init: for each number, `cache[0] = 1`, so when number is equal to target, it returns 1.
 		* Go through the cache. `cache[target] += cache[target - nums[0]] + cache[target - nums[1]] + cache[target - nums[2]] + ...`. 
+
+# LC - Maximum Size Subarray Sum Equals k
+Problem: *given an array, get the max size sub-arrays which sum is equal to k.* Sub-array is continuous array. ([Source](https://discuss.leetcode.com/category/405/maximum-size-subarray-sum-equals-k))
+
+## Analysis
+1. **Brutal force**: check n^2 subarrays. Each check is O(n) so total is O(n^3).
+2. **Sliding Window**: it may contain negative number, so this approach doesn't work.
+3. **DP**: what's the sub-problem formula? Say nth element is the last one in max-size sub-array, we need to find previous max array which sum is equal to `k-element[n]`.  We can do that with a range `[totalNegativeSum, totalPositiveSum]` with `n` elements. 
+4. **iterative accumulative sum**: all sum of sub-arrays could try this approach. 
+	* Use a dictionary or hash table to store sum -> index mapping. Sum is for `[0, current_index]`.
+	* When reach to next element, we can check if hash table has a key equal to `k-element[n]`, if yes, we found a sub-array starting from the index in hash table to current element; however, add to hash table.
+	* When two different indexes have the same sum, we always choose the smaller index because it enables bigger subarray length, i.e., if hash table has the key, do nothing.
+
+signature
+```
+public int GetMaxSizeOfSubArray(int[] array, int k)
+```
+
+## Learning
+1. I need more practice on mind debugging:). There's a major code bug in my original code. It shouldn't have happened.
