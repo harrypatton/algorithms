@@ -90,3 +90,31 @@ In this case, the array may have positive and negative numbers.
 #Learning
 1. when code 3-sum problem, it is cleaner to merge 2-sum method in the same function. E.g., solution in [discussion page](https://leetcode.com/problems/3sum-closest/?tab=Solutions).
 2. If we need to return the subset or subarray, backtracking is the best way.
+
+
+# LC53 - Maximum Subarray
+[Source](https://leetcode.com/problems/maximum-subarray/#/description)
+
+*Find the contiguous subarray within an array (containing at least one number) which has the largest sum.*
+
+Example
+```
+given the array [-2,1,-3,4,-1,2,1,-5,4],
+the contiguous subarray [4,-1,2,1] has the largest sum = 6.
+```
+
+## Analysis
+1. **Brutal Force** - there're n^2 subarrays. Each array sum is O(n) so it is O(n^2).
+2. **Sliding Window** - when reach a negative element, not sure if we need to move. e.g., 2, -1, 3
+3. **Accumulative Sum** - calculate current sum for elements `[0, n]` and also save the min sum among `[0, i], i is [0, n-1]`, then we calculate the max sum. Time O(n). Edge cases:
+	* how to handle current element alone is the biggest one? It is the same when the sum of `[0, n-1]` is the min value.
+	* how to handle the whole array has biggest sum? e.g., all positive numbers. Need to start with min value `zero`.
+	* time O(n)
+4. **DP**
+	* base: f(0) = first element
+	* f(n) means the max-sum sub-array ending with 'n'. `f(n) = max(f(n-1) + element, element)`
+	* use a `max` to save biggest f(n).
+	* time O(n). 
+
+## Learning
+1. DP is a better solution than Accumulative Sum when handle edge cases. I missed one scenario when write Accumulative Sum.
