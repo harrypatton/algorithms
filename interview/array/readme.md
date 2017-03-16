@@ -296,3 +296,30 @@ What if the array is too large to fit in one node? We have to store all those st
 1. Similar to external sorting. Sort all string on every single machine and then get a master machine to read one string from every machine. It is `n-way merging sort`; we can minimize the network communication cost by read a small chuck of data from one machine at once. 
 2. Partition - one machine owns one partition and other machines send data in that partition to that machine, so result from one machine is independent on others. The result is just a combination.
 3. Partition is better because if one node is down, it only impacts that partition. In `external sorting` solution, one node failure would block the system.
+
+# LC17 - Letter Combinations of a Phone Number
+Problem: *given a digit string, find all letter combinations. Order doesn't matter.*. ([Source](https://leetcode.com/problems/letter-combinations-of-a-phone-number/#/description)). The mapping is,
+
+* 1 -> abc
+* 2 -> def
+* ...
+* 8 -> tuv
+* 9 -> wxyz
+
+```
+public IList<string> GetCombinations(string digits);
+```
+
+## Analysis
+The problem is very similar to string permutation.
+
+1. We can either use a Queue or temporary list to do the work. Queue is probably more memory efficient depending on the underlying memory.
+
+Edge case:
+
+1. what return when string is empty.
+2. calculate the start and end char for each digit.
+
+## Learning
+1. funny - operator precedence. `x.y` > `(x)y` > `?:`
+2. I calculate start and end char by myself to save some memory; however, if we use a hard-code string array for the mapping, the code is better to maintain with few bugs. The memory cost is O(1).
