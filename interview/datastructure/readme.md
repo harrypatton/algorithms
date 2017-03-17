@@ -1,4 +1,4 @@
-#Map Implementation
+# Map Implementation
 source: http://blog.gainlo.co/index.php/2016/08/14/uber-interview-question-map-implementation/
 
 *Implement data structure “Map” storing pairs of integers (key, value) and define following member functions in O(1) runtime: void insert(key, value), void delete(key), int get(key), int getRandomKey().*
@@ -24,3 +24,34 @@ source: http://blog.gainlo.co/index.php/2016/08/14/uber-interview-question-map-i
 
 ## Learning
 1. I came up with the same solution as in source page.
+
+# LC - Two Sum III - Data Structure Design
+Source: [1](http://www.programcreek.com/2014/03/two-sum-iii-data-structure-design-java/), [2](http://www.cnblogs.com/grandyang/p/5184143.html), [3](https://discuss.leetcode.com/category/178/two-sum-iii-data-structure-design)
+
+*Design and implement a TwoSum class. It should support the following operations: add and find.*
+
+`add` - Add the number to an internal data structure.
+`find` - Find if there exists any pair of numbers which sum is equal to the value.
+
+For example,
+```
+add(1); 
+add(3); 
+add(5);
+find(4) -> true
+find(7) -> false
+```
+
+## Analysis
+I like this kind of question. It is easy to understand and also test data structure and algorithm. 
+
+ Solution | Add | Find  | Space
+ ------------- |-------------| ----- | ----
+ Add the item to an array; calculate all sum and save in a hashset. | time O(n) | time O(1) | array O(n), hash O(n^2)
+ Add the item to an array; save it in a hashset; in `find`, go through the array and check if any `sum-element` exists in hashset. Need to handle `sum = 2 * element case` (i.e., track item count in dictionary.)      | time O(1)   |   time O(n) | array O(n), hash O(n)
+  Add the item to an array. in `find`, check every two elements  | time O(1) | time O(n^2)      | array O(n), no hash.
+ Add the item to a sorted array. in `find`, use two pointers start and end to scan.  | time O(logn) | time O(n)      | array O(n), no hash.
+
+That's all solutions I can think of for now. The best solution is the 2nd one depending on the requirements.
+
+**Update**: my analysis is better than most forum threads. I also cover more solutions.
