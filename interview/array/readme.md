@@ -344,3 +344,22 @@ Return "100".
 
 ## Learning
 1. code is easy to write but StringBuilder doesn't have Reverse() method. I have to do `StringBuilder -> string -> CharArray -> Reverse() -> ToArray -> string`. In interview, I'll call a method `Reverse` on `StringBuilder`. In work, I'll add an extension method.
+
+# LC215 - Kth Largest Element in an Array
+*Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.* [Source](https://leetcode.com/problems/kth-largest-element-in-an-array/#/description)
+
+For example,
+```
+Given [3,2,1,5,6,4] and k = 2, return 5.
+```
+
+Note: 
+You may assume k is always valid, 1 ≤ k ≤ array's length.
+
+## Learning
+1. It takes me a while to implement the min-heap using C#. .NET doesn't have built-in support for that and no support for sorted list which allows duplicate elements. What I did is,
+	* Create a Heap class.
+	* Internally use SortedSet which doesn't allow duplicate elements.
+	* Internally use a Dictionary to record each element count.
+	* With the count, I determine when it is add or remove the unique element in SortedSet.
+	* Memory O(k). Performance is good too.
