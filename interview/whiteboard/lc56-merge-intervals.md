@@ -11,6 +11,8 @@ return [1,6],[8,10],[15,18].
 
 It is very easy to write down the algorithm. Just need to be careful about the List.Sort(). The method exists in List class instead of IList interface, so I have to copy it to a list first. 
 
+**code one time pass.**
+
 ```csharp
 /**
  * Definition for an interval.
