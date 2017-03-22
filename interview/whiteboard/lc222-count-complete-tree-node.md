@@ -14,6 +14,8 @@ In a complete binary tree every level, except possibly the last, is completely f
 5. if both are equal, we can calculate count of left sub-tree and recursively call right sub-tree.
 6. There is an issue when I designed the solution but realized the issue while coding. I was using far left and far right node in original version and it is wrong.
 
+**Update**: discussion page has nicer code for recursion and also iterative solutions.
+
 ```csharp
 /**
  * Definition for a binary tree node.
