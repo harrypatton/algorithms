@@ -21,7 +21,7 @@ Given a collection of numbers that might contain `duplicates`, return all possib
 The key thing here is about the `duplicates`. 
 
 1. **brutal force** - get all permutation and remove duplicates. It is inefficient.
-2. **iterative** - we still get the result from left to right; however, when add new element, we add it only if the previous element is not the same value. (if yes, we already added it). E.g., add `b` to `abcb`, it becomes `babcb`, `abbcb`, `abcbb`.
+2. ~**iterative** - we still get the result from left to right; however, when add new element, we add it only if the previous element is not the same value. (if yes, we already added it). E.g., add `b` to `abcb`, it becomes `babcb`, `abbcb`, `abcbb`.~
 	* **Update**: this solution doesn't work for `2, 2, 1, 1`. 
 3. **Next Permutation** - aka., `lexicographical order`, a new way to add elements incrementally. 
 	* **Update**: tried myself but cannot figure out the right algorithm. need to look for help:). See next section for `Next Permutation algorithm`.
