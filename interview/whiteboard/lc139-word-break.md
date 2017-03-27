@@ -1,5 +1,5 @@
 
-This solution is a weird DP solution. List here for now.
+This solution is a weird DP solution. List here anyway. LeetCode [discussion page](https://discuss.leetcode.com/topic/6156/java-implementation-using-dp-in-two-ways/15) has two better solutions.
 
 ```csharp
 public class Solution {
