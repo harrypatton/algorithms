@@ -10,6 +10,7 @@ After that, scan 2d from left to right.
 2. Pre-order, in-order or post-order doesn't help. It seems that we need to sort it in some way. The 3 order traversal can give us an array
  and we need to sort it (based on what?). Depth and the column index. Column index is primary key and then check depth. How to get depth 
  and column index? We can use in-order traversal and use new class to include node, row index (i.e., depth) and column index.
+3. discussion page has a simpler solution to handle list using dictionary though. It uses two queue lists to avoid additional class; but it should be the same.
  
  ```csharp
  public class OrderedTreeNode {
