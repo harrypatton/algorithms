@@ -1,4 +1,28 @@
+[Source](https://leetcode.com/problems/count-of-smaller-numbers-after-self/#/description)
 
+You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+
+Example:
+```
+Given nums = [5, 2, 6, 1]
+
+To the right of 5 there are 2 smaller elements (2 and 1).
+To the right of 2 there is only 1 smaller element (1).
+To the right of 6 there is 1 smaller element (1).
+To the right of 1 there is 0 smaller element.
+```
+Return the array [2, 1, 1, 0].
+
+## Analysis
+This problem is very similar to the one that calculate how many inversion pair in an array. A modified merge sort works well.
+During the merge, when we pick up right part of array, we know how to calculate the count.
+
+A few things to note,
+
+1. Merge sort has to use O(n) memory. In-place sorting is very hard to write.
+2. It is ok to introduce a modified data structure. e.g., in this case, we use a class to store index and count.
+
+## Code
 
 ```csharp
 public class Solution {
