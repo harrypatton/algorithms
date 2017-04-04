@@ -44,6 +44,7 @@ There are a few solutions for this problem,
 3. **DP** - I find a lot of duplication in above solution (e.g., two pointers - keep checking the same 2 elements). We can save it in memory but is there any intuitive way?
 	* use 1/0 pick, it goes back to the 2 sum and 3 sum subproblems. no DP.
 	* instead of using Hash Table, use an array of length total_sum to save all possible 2-sum before current element. It is even worse than Hash Table solution.
+4. **Two Pointers**: sort the array first. Scan from the 3rd element. If the sub-array before this element has 2 elements with sum (target - element[current], if yes, we found it. How to find 2 elements with target sum, go back to previous two pointers solution. So time O(n^2), space O(1).
 
 
 # 4-Sum
