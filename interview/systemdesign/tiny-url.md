@@ -21,3 +21,4 @@ In this case, it can avoid one machine down. We can keep add more machines if ne
 
 1. a few machines generates random id. Each machine has a server id.
 2. In that machine, it generates an id made of time stamp and sequence number.
+3. The full ID is composed of a timestamp, a worker number, and a sequence number.
