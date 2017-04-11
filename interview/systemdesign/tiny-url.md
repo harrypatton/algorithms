@@ -14,11 +14,18 @@
 ## Database incremental id
 
 1. the incremenal id could be 32 or 64 bit integer. Flicker shows a simple command to always get new id from DB.
-2. fault: what if the server is down? Flicker uses two machines. Each machine increase by 2; one starts with 1, and the other starts with 2. 
-In this case, it can avoid one machine down. We can keep add more machines if necessary and the gap becomes `machine count`.
+2. fault: what if the server is down? Flicker uses two machines. Each machine increase by 2; one starts with 1, 
+and the other starts with 2. In this case, it can avoid one machine down. We can keep add more machines if necessary and the gap becomes `machine count`.
+3. Once get the id, use 62-based string to get shorter URL.
 
-## Twitter way
+## Twitter way to generate random id
 
 1. a few machines generates random id. Each machine has a server id.
 2. In that machine, it generates an id made of time stamp and sequence number.
 3. The full ID is composed of a timestamp, a worker number, and a sequence number.
+
+## Scalability
+
+1. when we have more and more data that a single machine cannot hold the result, we have to use distributed system. 
+2. hash the long url to be an integer and then use the integer to find the machine. On the machine, get an id and get short url.
+3. because each machine has its own id generator, so two machines may generate the same id. So we need to add a worker id in shorter string. This post has a good explanation: http://blog.wenhaolee.com/system-design-tinyurl/
