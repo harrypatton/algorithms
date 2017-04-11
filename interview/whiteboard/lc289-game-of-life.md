@@ -1,5 +1,7 @@
 Source: https://leetcode.com/problems/game-of-life/#/description
 
+Look at other people's solution, I have to say it is elegant and concise when handle `SetState` method. https://discuss.leetcode.com/topic/29054/easiest-java-solution-with-explanation/2
+
 very straightforward solution. Space is O(1) and time is O(n). Even each cell checks 8 times (for neighbors)
 
 ```csharp
