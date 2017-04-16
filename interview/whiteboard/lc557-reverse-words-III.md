@@ -9,6 +9,10 @@ Output: "s'teL ekat edoCteeL tsetnoc"
 ```
 **Note**: In the string, each word is separated by single space and there will not be any extra space in the string.
 
+## Learning
+1. Check the first solution to find each word. It is concise than the 2nd one.
+2. Check how to reverse a word. The first one is better.
+
 ```c#
 /*
 it is a string with a few words. need to reverse the word itself but keep space and world order.
@@ -54,6 +58,16 @@ public class Solution {
     }
     
     public void ReverseWord(char[] chars, int start, int end) {
+        while(start < end) {
+            var temp = chars[start];
+            chars[start] = chars[end];
+            chars[end] = temp;
+            start++;
+            end--;
+        }
+    }
+    
+    public void ReverseWord_2(char[] chars, int start, int end) {
         if (start >= chars.Length) return;
         int middle = start + (end - start) / 2;
         
