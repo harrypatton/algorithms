@@ -10,10 +10,6 @@ Note:
 
 ```csharp
 public class Solution {
-    /*
-    Looks like a DP because it asks for min count. In other words, it means finding max non-overlapping intervals.
-    when select current interval, it needs to check if any previous interval overlaps with it. Total time: O(n^2).
-    */
     public int EraseOverlapIntervals(Interval[] intervals) {
         if(intervals == null || intervals.Length <= 1) return 0;
         
