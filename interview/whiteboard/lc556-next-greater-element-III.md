@@ -28,7 +28,7 @@ use lexicographical order to do the work.
 be careful about the edge case below,
 test: 1,999,999,999 => 9,199,999,999 (too big)
 
-that's why we need to try-catch there.
+that's why we need to try-catch there. Another way to do is to convert to long. If the value >= int.MaxValue, return -1.
 */
 public class Solution {
     public int NextGreaterElement(int n) {
