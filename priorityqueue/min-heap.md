@@ -55,10 +55,10 @@ class MinHeap<T> where T: IComparable<T> {
             int left = 2 * (i + 1) - 1;
             int right = 2 * (i + 1);
             
-            // THIS PART IS WRONG: from wiki: Swap with its smaller child in a min-heap and its larger child in a max-heap.
-            if (left < data.Count && (data[left].CompareTo(data[i]) < 0)) {
+            // From wiki: Swap with its smaller child in a min-heap and its larger child in a max-heap.
+            if (left < data.Count && (data[left].CompareTo(data[smallest]) < 0)) {
                 smallest = left;
-            } else if (right < data.Count && (data[right].CompareTo(data[i]) < 0)) {
+            } else if (right < data.Count && (data[right].CompareTo(data[smallest]) < 0)) {
                 smallest = right;
             }
 
