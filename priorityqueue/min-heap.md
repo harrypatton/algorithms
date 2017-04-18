@@ -3,6 +3,8 @@
 * http://allanrbo.blogspot.com/2011/12/simple-heap-implementation-priority.html
 * https://en.wikipedia.org/wiki/Binary_heap
 
+You can also look at MinHeap implementation from merge-k-sorted-list here https://github.com/harrypatton/algorithms/blob/master/interview/whiteboard/lc23-merge-k-sorted-list.md
+
 ```csharp
 class MinHeap<T> where T: IComparable<T> {
         private List<T> data = new List<T>();
