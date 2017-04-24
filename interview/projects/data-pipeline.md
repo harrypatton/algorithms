@@ -39,6 +39,7 @@ Telemetry client library is required to simply sending event work for each produ
 ## Offline Scenario
 1. All events go to a queue. Every minute we store all events in the queue to a local file in temp folder. Question: do we keep generating new files if the machine is offline forever? 
 2. A background thread will check file and call the web api to upload. We use mutex here for multiple instances to upload these files. Only one active uploader at a time. That's why we use mutex. It is the best locking solution in this scenario. (if we use read lock, we have to release it before delete it. In that case, there's a race condition that another instance may read it. so duplicate events).
+3. If app crashes before flush to disk, we lose the events; but it is a fine trade-off.
 
 ## Privacy Information
 1. Ok to send sensitive information for internal/test users; Have to hash it for external users.
