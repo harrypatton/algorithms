@@ -20,9 +20,9 @@ Telemetry client library is required to simply sending event work for each produ
 1. **Web api wrapper**. A wrapper to handle web api calling including retry and batching.
 2. Every event has the same **common schema**, e.g., user id, machine id, OS information.
 3. **Offline scenario**.
-4. Privacy information utility - hash sensitive information for external users.
-5. Dynamic Telemetry - disable events on the fly.
-6. Support different channels (i.e., receivers)
+4. **Privacy information utility** - hash sensitive information for external users.
+5. **Dynamic Telemetry** - disable events on the fly.
+6. Support **multiple channels** (i.e., receivers)
 
 ## Web API Wrapper
 * When API call failed, use exponential rety (or [exponential backoff](https://en.wikipedia.org/wiki/Exponential_backoff))
@@ -38,3 +38,18 @@ Telemetry client library is required to simply sending event work for each produ
 
 ## Offline Scenario
 1. All events go to a queue. Every minute we store all events in the queue to a local file in temp folder. Question: do we keep generating new files if the machine is offline forever? 
+2. A background thread will check file and call the web api to upload. We use mutex here for multiple instances to upload these files. Only one active uploader at a time. That's why we use mutex. It is the best locking solution in this scenario. (if we use read lock, we have to release it before delete it. In that case, there's a race condition that another instance may read it. so duplicate events).
+
+## Privacy Information
+1. Ok to send sensitive information for internal/test users; Have to hash it for external users.
+2. It also detects if the user is external or not. A few complicated logics (check company domain or whitelist).
+
+## Dynamic Telemetry
+1. Disable events based on a blacklist on server. It means every time we have to download it. Why? Patching client apps is not easy; but disabling sensitive event becomes an urgent requirement (to avoid lawsuit)
+2. Disable unused or crappy events.
+3. How big is the blacklist? less than 1 hundred so far.
+
+## Multiple Channels
+1. Decouple event producer and receiver.
+2. Use multiple channels to verify data completeness.
+3. Enable test channel for unit testing.
