@@ -57,6 +57,16 @@ Telemetry client library is required to simply sending event work for each produ
 2. Use multiple channels to verify data completeness.
 3. Enable test channel for unit testing.
 
+# Event Receiver
+A service to receive events from millions of users.
+
+1. 60 VM with a load balancer.
+2. Rely the data to backend storage.
+3. Maintainence could be high.
+  * Monitor if any server is down or not.
+  * Fix a bad server.
+  * Rolling out update or bug fix.  
+
 # Others
 The following topics are something we need to think about in the future,
 
