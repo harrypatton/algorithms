@@ -11,7 +11,7 @@ There're 4 parts in my project,
 
 1. Event Producer on client side (Telemetry Client Library)
 2. Event Receiver
-3. Data Platform (Storage and Processor)
+3. Big Data Platform (Storage and Processor)
 4. Data Apps (Presentation)
 
 # Event Producer
@@ -62,10 +62,33 @@ A service to receive events from millions of users.
 
 * 60 VM with a load balancer.
 * Functionality: Rely the data to backend storage. Drop the data into a small files. There's a background service to combine and store them.
+  * web api is async task so it can return immediately.
+  * task adds the event to concurrency queue. When queue has more than 40 blocks (40 * 256kb = 10mb), take all of them and upload to backend storage. Everything is async task.
+  * when server crashed, all data got lost.
 * Maintainence could be high.
   * Monitor if any server is down or not.
   * Fix a bad server.
-  * Rolling out update or bug fix.
+  * Rolling out update or bug fix: take down one server and update it. we do it through a script to update machine one by one.
+* Have to change code when we add one more event subscriber.
+
+We should check Event Hub.
+
+* No maintainence cost.
+* Highly scale.
+* Support event subscriber.
+* Keep 7-day data even worker is dead.
+* Still need worker to save data to backend storage.
+
+# Big Data Platform
+Hadoop - distributed file system and also parallel computing system.
+* Jason format to a table with raw data
+* Create curated view - object => concrete class. User, Session, Project, Reliablity, Performance oriented.
+* Daily job processing.
+* Health monitoring.
+
+# Data Apps
+* Feature Count. Fault Monitoring. User Lookup, Customer Engagement.
+* Upload data to SQL Server. Big Data Platform is not suitable for interactive query. Convert data to csv and then import to SQL.
 
 # Others
 The following topics are something we need to think about in the future,
