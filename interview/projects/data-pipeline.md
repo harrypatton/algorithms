@@ -86,6 +86,10 @@ Hadoop - distributed file system and also parallel computing system.
 * Daily job processing.
 * Health monitoring.
 
+For any apps which cannot use client telemetry library, we need to bring them in data platform. **Question**: how to enable event pub-sub scenario then?
+
+Data Correlation: we may bring in 3-party data.
+
 # Data Apps
 * Feature Count. Fault Monitoring. User Lookup, Customer Engagement.
 * Upload data to SQL Server. Big Data Platform is not suitable for interactive query. Convert data to csv and then import to SQL.
