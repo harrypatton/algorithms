@@ -49,6 +49,7 @@ Telemetry client library is required to simply sending event work for each produ
 1. Disable events based on a blacklist on server. It means every time we have to download it. Why? Patching client apps is not easy; but disabling sensitive event becomes an urgent requirement (to avoid lawsuit)
 2. Disable unused or crappy events.
 3. How big is the blacklist? less than 1 hundred so far.
+4. The client needs to download the blacklist every time. Both API and the file content have version information.
 
 ## Multiple Channels
 1. Decouple event producer and receiver.
