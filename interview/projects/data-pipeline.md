@@ -53,3 +53,9 @@ Telemetry client library is required to simply sending event work for each produ
 1. Decouple event producer and receiver.
 2. Use multiple channels to verify data completeness.
 3. Enable test channel for unit testing.
+
+# Others
+The following topics are something we need to think about in the future,
+
+1. Telemetry Quality - how to make sure every one send data in good quality? Is there a good/quick way for them to validate?
+2. Volume Control - unused or less freqent used events? We should introduce some tiers concept. More data causes scalability challenge and waste money.
