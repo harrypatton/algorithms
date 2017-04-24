@@ -44,6 +44,7 @@ Telemetry client library is required to simply sending event work for each produ
 ## Privacy Information
 1. Ok to send sensitive information for internal/test users; Have to hash it for external users.
 2. It also detects if the user is external or not. A few complicated logics (check company domain or whitelist).
+3. Need to handle opted-out users. Don't send any events.
 
 ## Dynamic Telemetry
 1. Disable events based on a blacklist on server. It means every time we have to download it. Why? Patching client apps is not easy; but disabling sensitive event becomes an urgent requirement (to avoid lawsuit)
