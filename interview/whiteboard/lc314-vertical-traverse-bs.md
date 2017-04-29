@@ -12,6 +12,72 @@ After that, scan 2d from left to right.
  and column index? We can use in-order traversal and use new class to include node, row index (i.e., depth) and column index.
 3. discussion page has a simpler solution to handle list using dictionary though. It uses two queue lists to avoid additional class; but it should be the same.
  
+# Update
+1. Apparently when I did the question the second time, I found a better solution with O(n). The previous solution with OrderedNodeList is actually O(nlogn) due to the sorting.
+
+## New Code
+```c#
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) {this.val = x; this.left = this.right = null;}
+ * }
+ */
+
+/*
+1. When use BFS, we can gurantee the order on vertical.
+2. We need a way to check the column index so it is better to use another data structure to track it.
+3. Maintain a hash table so that key is column index and value is the list. Because of BFS, we just add to the end.
+4. Convert hash table value to List<List<int>>
+*/
+
+class NewTreeNode {
+    public TreeNode node;
+    public int column;
+    public NewTreeNode (TreeNode n, int c) {
+        node = n;
+        column = c;
+    }
+}
+
+class Solution {
+    public List<List<int>> verticalOrderTraversal(TreeNode A) {
+        if (A == null) return new List<List<int>>();
+        
+        var result = new Dictionary<int, List<int>>();
+        var q = new Queue<NewTreeNode>();
+        q.Enqueue(new NewTreeNode(A, 0));
+        int minColumn = int.MaxValue;
+        int maxColumn = int.MinValue;
+        
+        while(q.Count > 0) {
+            var n = q.Dequeue();
+            
+            minColumn = Math.Min(minColumn, n.column);
+            maxColumn = Math.Max(maxColumn, n.column);
+            
+            if(!result.ContainsKey(n.column)) result[n.column] = new List<int>();
+            result[n.column].Add(n.node.val);
+            
+            if(n.node.left != null) q.Enqueue(new NewTreeNode(n.node.left, n.column - 1));
+            if(n.node.right != null) q.Enqueue(new NewTreeNode(n.node.right, n.column + 1));
+        }
+        
+        var list = new List<List<int>>();
+        for(int i = minColumn; i <= maxColumn; i++) {
+            if(result.ContainsKey(i)) list.Add(result[i]);
+        }
+        
+        return list;
+    }
+}
+
+```
+
+## Old Code
  ```csharp
  public class OrderedTreeNode {
     public TreeNode node;
