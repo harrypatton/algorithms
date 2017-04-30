@@ -38,3 +38,6 @@ After running your function, the 2D grid should be:
 3. Keep doing that until queue is empty.
 
 [The source](http://www.cnblogs.com/grandyang/p/5285868.html) from `grandyang` has a good explaination on it.
+
+## Update
+1. Actually the leetcode discussion page prefer BFS because of the efficiency. In BFS, the condition becomes `neighbor.value == int.Max` and then add to queue. It makes sense if we think about BFS. It is level 0. If any node can reach the element, it must be the shortest. So it never has to update again after it becomes not int.Max. In production code, we should try iterative way and avoid recursion call.
