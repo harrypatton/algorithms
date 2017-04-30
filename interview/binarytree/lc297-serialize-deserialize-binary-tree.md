@@ -1,3 +1,90 @@
+Source: https://leetcode.com/problems/serialize-and-deserialize-binary-tree/#/description
+
+Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.
+
+Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.
+    
+## Code using BFS
+```c#
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+
+/*
+Solution - BFS
+    Serialization
+        1. use BFS to traverse each layer. root goes to the queue.
+        2. take one from queue. 
+            a. if node is not null, add the value to result and then add left/right to queue.
+            b. if not is null, add empty string to result.
+        3. print out the result by string.Join with comma.
+    Deserialization
+        1. parse the array.
+        2. if array is empty, it is an empty tree.
+        3. Create root node first and add to queue.
+        3. Iteration - start from index 1.
+            a. two steps at a time to handle left and right. if one is not null, add the queue.
+            b. Go to the queue to get current parent node.
+
+*/
+public class Codec {
+
+    // Encodes a tree to a single string.
+    public string serialize(TreeNode root) {
+        var result = new List<string>();
+        var q = new Queue<TreeNode>();
+        q.Enqueue(root);
+        
+        while(q.Count > 0) {
+            var node = q.Dequeue();
+            if (node == null) result.Add("");
+            else {
+                result.Add(node.val.ToString());
+                q.Enqueue(node.left);
+                q.Enqueue(node.right);
+            }
+        }
+        
+        return string.Join(",", result);
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(string data) {
+        // NOTE here. If data is string, the elements will contain only one element which is empty value.
+        var elements = data.Split(',');
+        
+        var q = new Queue<TreeNode>();
+        var root = GetNodeAndEnqueueIfNotNull(elements[0], q);
+        
+        for(int i = 1; i < elements.Length; i = i + 2) {
+            var p = q.Dequeue();
+            p.left = GetNodeAndEnqueueIfNotNull(elements[i], q);
+            p.right = GetNodeAndEnqueueIfNotNull(elements[i+1], q);
+        }
+        
+        return root;
+    }
+    
+    private TreeNode GetNodeAndEnqueueIfNotNull(string str, Queue<TreeNode> q) {
+        var node = str == "" ? null : new TreeNode(Convert.ToInt32(str));
+        if (node!= null) q.Enqueue(node);
+        return node;
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec codec = new Codec();
+// codec.deserialize(codec.serialize(root));
+```
+
+## Code with preorder
+```c#
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -132,3 +219,5 @@ public class Codec_Preorder_Parenthesis {
 // Your Codec object will be instantiated and called as such:
 // Codec codec = new Codec();
 // codec.deserialize(codec.serialize(root));
+
+```
