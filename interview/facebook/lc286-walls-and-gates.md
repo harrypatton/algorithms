@@ -25,3 +25,16 @@ After running your function, the 2D grid should be:
   1  -1   2  -1
   0  -1   3   4
 ```
+
+## Analysis
+
+### DFS
+1. Start with DFS for every gate.
+2. Assume value for element i is n. Check the neighbors. If neighbor value > n + 1, replace it and start DFS on neighbor; otherwise, stop checking this neighbor. 
+
+### BFS
+1. Use a queue to add all gates.
+2. Take one node from the queue. If neighbor value > n + 1, update it and add to queue.
+3. Keep doing that until queue is empty.
+
+[The source](http://www.cnblogs.com/grandyang/p/5285868.html) from `grandyang` has a good explaination on it.
