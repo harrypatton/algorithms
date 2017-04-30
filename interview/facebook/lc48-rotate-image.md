@@ -10,6 +10,41 @@ Could you do this in-place?
 # Analysis
 I used a naive way to do it in-place but the edge cases are still hard to solve. The code becomes very ugly. 
 
+## My solution based on discussion page
+```c#
+/*
+based on the solution from discussion page, the algorithm becomes,
+1. reverse each column.
+2. do symmetry swap.
+*/
+public class Solution {
+    public void Rotate(int[,] matrix) {
+        if(matrix == null) return;
+        var n = matrix.GetLength(0);
+        
+        // reverse each column
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n/2; j++) {
+                Swap(matrix, j, i, n -1 - j , i);
+            }
+        }
+        
+        // symmetry swap
+        for(int i = 0; i < n; i++) {
+            for(int j = i + 1; j < n; j++) {
+                Swap(matrix, i, j, j, i);
+            }
+        }
+    }
+    
+    public void Swap(int[,] matrix, int x1, int y1, int x2, int y2) {
+        var temp = matrix[x1, y1];
+        matrix[x1, y1] = matrix[x2, y2];
+        matrix[x2, y2] = temp;
+    }
+}
+```
+
 ## Solution from Discussion Page
 Very clean and easy to understand solution.
 
