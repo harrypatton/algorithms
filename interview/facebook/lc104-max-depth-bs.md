@@ -38,14 +38,14 @@ public class Solution_BFS {
     }
 }
 
-public class Solution_Simple {
+public class Solution_DFS_Simple {
     public int MaxDepth(TreeNode root) {
         if(root == null) return 0;
         return Math.Max(MaxDepth(root.left), MaxDepth(root.right)) + 1;
     }
 }
 
-public class Solution_Original {
+public class Solution_DFS_Naive {
     private int max = 0;
     
     public int MaxDepth(TreeNode root) {
