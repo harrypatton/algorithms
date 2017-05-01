@@ -60,3 +60,38 @@ e.g., "105", 5 -> ["1*0+5","10-5"]
         }
     }
 ```
+# Update
+This is a solution from discussion page. Very smart to handle zero leading, multiple digit number and the production scenarios.
+
+```c#
+    public class Solution {        
+        public IList<string> AddOperators(string num, int target) {
+            var result = new List<string>();
+            Helper(result, path: "", num: num, target: target, pos: 0, eval: 0, multiple: 0);
+            return result;
+        }
+
+        private void Helper(IList<string> result, string path, string num, int target, int pos, long eval, long multiple) {
+            if (pos == num.Length) {
+                if (target == eval) result.Add(path);
+                return;
+            }
+
+            for(int i = pos; i < num.Length; i++) {
+                // in this case, we cannot have a number with leading zero so we return it immediately.
+                if (num[pos] == '0' && i != pos) break;
+
+                string currentValueStr = num.Substring(pos, i - pos + 1);
+                long currentValue = Convert.ToInt64(currentValueStr);
+
+                if (pos == 0) {
+                    Helper(result, path + currentValueStr, num, target, i + 1, eval + currentValue, currentValue);
+                } else {
+                    Helper(result, path + "+" + currentValueStr, num, target, i + 1, eval + currentValue, currentValue);
+                    Helper(result, path + "-" + currentValueStr, num, target, i + 1, eval - currentValue, -currentValue);
+                    Helper(result, path + "*" + currentValueStr, num, target, i + 1, eval - multiple + currentValue * multiple, currentValue * multiple);
+                }
+            }
+        }        
+    }
+```
