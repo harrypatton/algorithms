@@ -29,7 +29,7 @@ topological order.
 public class Solution {
     public bool CanFinish(int numCourses, int[,] prerequisites) {
         var dict = new HashSet<int>[numCourses];;
-        var degree = new Dictionary<int, int>();
+        var degree = new int[numCourses];
         
         // init degree
         for(int i = 0; i < numCourses; i++) {
@@ -50,8 +50,8 @@ public class Solution {
         
         // init the queue
         var q = new Queue<int>();
-        foreach(var key in degree.Keys) {
-            if (degree[key] == 0) q.Enqueue(key);
+        for(int i = 0; i < numCourses; i++) {
+            if (degree[i] == 0) q.Enqueue(i);
         }
         
         int count = 0;
