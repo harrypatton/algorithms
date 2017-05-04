@@ -10,7 +10,8 @@ Basically, the deletion can be divided into two stages:
 **Note**: Time complexity should be O(height of tree).
 
 ## Update
-My code is crappy. Although it passed OJ, it is hard to follow and complicated. Here're two solutions from discussion page,
+1. My code is crappy. Although it passed OJ, it is hard to follow and complicated. Here're two solutions from discussion page.
+2. I need to use BST character more to divide and conquer. My code doesn't take advantage of it. My code is designed for binary tree, and later find far left node in right tree (which imply the tree should be BST).
 
 ### Solution 1 - I don't like the way it exchanges the node value, but it is very clean.
 
