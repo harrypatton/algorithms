@@ -22,6 +22,7 @@ node, pre_node, next_node.
 2. When parameter name and class variable have the same name, the parameter name always win because of the local scope.
     * we either use `this.` to specify which one to use
     * or, use a different variable name.
+3. Use a better name like `MoveToHead`, `RemoveTail` etc. In my code, `head` is the oldest element.
 
 ```c#
 public class LRUCache {
