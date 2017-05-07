@@ -28,9 +28,9 @@ Unlike the recursion, this way uses two pointers to move forward. To handle `*`,
 
 It nevers try `*` before latest `*`, because,
 
-1. we found match when reach latest `*`, say [0, a1] matchs [0, b1].
-2. Assume latest `*` cannot help to find match [a1 + 1, a_end] cannot match [b1 + 1, b_end].
-3. Assume previous `*` find match, so [0, a_end] match [0, b_end]
+1. the algorithm always try minimum chars for the `*` and move to next.
+2. If latest `*` cannot help and ask previous `*` to match more chars in step 1, 
+it means latest `*` and the rest of string will match fewer characters than before. It is not right given that `*` already tried.
 
 anyway, it is a little weird to explain it.
 
