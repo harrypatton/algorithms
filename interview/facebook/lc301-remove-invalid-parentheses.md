@@ -73,3 +73,44 @@ public class Solution {
     }
 }
 ```
+
+## Naive Solution
+This is the naive way to do the work. I basically check every possible combination and exit earlier if partial result is invalid (i.e. open < close). It barely passed the OL but inefficient.
+
+``` C#
+public class Solution {
+    private int max = 0;
+    private HashSet<string> result = new HashSet<string>();
+    
+    public IList<string> RemoveInvalidParentheses(string s) {
+        RemoveInvalidParentheses(s, "", 0, 0);
+        if (result.Count == 0) return new List<string>();        
+        return result.ToList();
+    }
+    
+    public void RemoveInvalidParentheses(string s, string currentResult, int open, int close) {
+        if (open == close) {
+            if (currentResult.Length >= max) {
+                if (currentResult.Length > max)  {
+                    max = currentResult.Length;
+                    result = new HashSet<string>();
+                }
+                result.Add(currentResult);
+            }            
+        }
+        
+        // invalid string
+        if (open < close) return;        
+        if (s == "") return;        
+        
+        if (s[0] != '(' && s[0] != ')') {
+            RemoveInvalidParentheses(s.Substring(1), currentResult + s[0].ToString(), open, close);
+        } else {
+            RemoveInvalidParentheses(s.Substring(1), currentResult, open, close);
+            if (s[0] == '(') RemoveInvalidParentheses(s.Substring(1), currentResult + "(", open+1, close);            
+            else RemoveInvalidParentheses(s.Substring(1), currentResult + ")", open, close+1);
+        } 
+    }
+}
+
+```
