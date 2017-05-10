@@ -12,6 +12,9 @@ Examples:
 ")(f" -> ["f"]
 ```
 
+## Original Solution
+This is the same efficiency as the naive one below. 
+
 ```c#
 /*
 this is a hard level question. 
