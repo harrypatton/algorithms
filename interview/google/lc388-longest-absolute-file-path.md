@@ -2,6 +2,33 @@ source: https://leetcode.com/problems/longest-absolute-file-path/#/solutions
 
 Check the source for problem.
 
+## Clean Solution
+It uses stack to track parent and level. It also calculates max length on the fly.
+
+``` C#
+public class Solution {
+    public int LengthLongestPath(string input) {
+    	if(input == null || input.Length == 0) return 0;
+        int max = 0;
+        var stack = new Stack<int>();
+        stack.Push(0); // dummy parent.
+
+        // iterate each one
+        foreach(var str in input.Split('\n')) {        	
+        	// the first level directory without '\t' is 0.
+        	var level = str.LastIndexOf('\t') + 1; 
+
+        	while(stack.Count - 1 > level) stack.Pop(); // move parent to the top of stack
+        	var length = stack.Peek() + (str.Length - level) + 1; // parent + current length + separator
+        	stack.Push(length);
+        	if (str.Contains('.')) max = Math.Max(max, length - 1); // -1 means remove the separator
+        }
+
+        return max;
+    }
+}
+```
+
 ## Original Solution
 1. I know the string is DFS-serialized one but failed to write out an iteration solution to deserialize it using stack. I should have
 used the `\t` count to induce the level. What I implemented below is using recursion.
