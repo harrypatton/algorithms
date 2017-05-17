@@ -20,10 +20,10 @@ That's why we need a HashSet for the check.`
 1. use backtracking.
 2. save a dictionary (global) to save the mapping.
 3. start from pattern. 
-    a. the first letter could map to substring(0,1), substring(0, 2) ... str.
-    b. add the map to dictionary and recursive call the rest of them.
-    c. if the first letter has a mapping in dictionary, try to compare with the str. 
-    d. whenever failed to match, try next possibility. 
+    * the first letter could map to substring(0,1), substring(0, 2) ... str.
+    * add the map to dictionary and recursive call the rest of them.
+    * if the first letter has a mapping in dictionary, try to compare with the str. 
+    * whenever failed to match, try next possibility. 
 4. be careful about the edge case.
 
 ### Complexity
