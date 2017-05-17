@@ -11,7 +11,7 @@ Sudoku:
 2. I look at the discussion page. There're clean solutions there. Be careful about the edge case where we calculate the index for box case.
 
 ### Clean code
-```
+```c#
 public class Solution {
     public bool IsValidSudoku(char[,] board) {
         if (board == null || board.GetLength(0) != 9 || board.GetLength(1) != 9) return false;
