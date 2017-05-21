@@ -26,7 +26,48 @@ It should return [1,4,8,2,5,9,3,6,7].
 Use a variable to track current list. Use mod to go back to first one.
 3. when use the list, it is better to use a linkedlist so removing cost is low.
 
-### k-list scenario
+## k-list scenario
+The code below uses custom double linked list to implement cyclic list. Actually we just need a single linked list with a head and tail.
+To use built-in structure, we can even use Queue to do the work.
+
+### Queue
+much clean code compared with custom double linked list implementation.
+
+```c#
+public class ZigzagIterator {
+
+	public class Node {
+		public IList<int> list;
+		public int index;
+		public Node(IList<int> list) {
+			this.list = list;
+		}
+	}
+
+	public Queue<Node> q;
+
+    public ZigzagIterator(IList<int> v1, IList<int> v2) {
+        q = new Queue<Node>();
+        foreach(var list in new IList<int>[] {v1, v2}) {
+        	if (list != null && list.Count > 0) q.Enqueue(new Node(list));
+        }
+    }
+
+    public bool HasNext() {
+        return q.Count > 0;
+    }
+
+    public int Next() {
+        var node = q.Dequeue();
+        var result = node.list[node.index++];
+        if (node.index < node.list.Count) {
+        	q.Enqueue(node);
+        }
+        return result;
+    }
+}
+```
+### double linked list
 ```c#
 public class ZigzagIterator {
 
@@ -85,15 +126,9 @@ public class ZigzagIterator {
      	return result;
     }
 }
-
-/**
- * Your ZigzagIterator will be called like this:
- * ZigzagIterator i = new ZigzagIterator(v1, v2);
- * while (i.HasNext()) v[f()] = i.Next();
- */
 ```
 
-### 2-list scenario
+## 2-list scenario
 ```c#
 public class ZigzagIterator {
 
@@ -124,10 +159,4 @@ public class ZigzagIterator {
      	else return list2[index2++];
     }
 }
-
-/**
- * Your ZigzagIterator will be called like this:
- * ZigzagIterator i = new ZigzagIterator(v1, v2);
- * while (i.HasNext()) v[f()] = i.Next();
- */
 ```
