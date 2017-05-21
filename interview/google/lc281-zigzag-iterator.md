@@ -27,6 +27,71 @@ Use a variable to track current list. Use mod to go back to first one.
 3. when use the list, it is better to use a linkedlist so removing cost is low.
 
 ### k-list scenario
+```c#
+public class ZigzagIterator {
+
+	public class LinkedNode {
+		public IList<int> list;
+		public LinkedNode pre;
+		public LinkedNode next;
+		public int index;
+
+		public LinkedNode(IList<int> list) {
+			this.list = list;
+			index = 0;
+		}
+	}
+
+	private LinkedNode current;
+
+    public ZigzagIterator(IList<int> v1, IList<int> v2) {
+        foreach(IList<int> list in new IList<int>[] {v1, v2}) {
+        	if (list != null && list.Count > 0) {
+        		if (current == null) {
+        			current = new LinkedNode(list);
+        			current.pre = current;
+        			current.next = current;
+        		} else {
+        			var node = new LinkedNode(list);
+        			node.next = current.next;
+        			current.next = node;
+        			node.next.pre = node;
+        			node.pre = current;
+        			current = node;
+        		}
+        	}
+        }
+
+        if (current != null) current = current.next;
+    }
+
+    public bool HasNext() {
+        return current != null;
+    }
+
+    public int Next() {    	
+     	var result = current.list[current.index++];
+
+     	// list is used up
+     	if (current.index == current.list.Count) {
+     		if (current.next == current) current = null;
+     		else {
+     			current.pre.next = current.next;
+     			current.next.pre = current.pre;
+     			current = current.next;
+     		}
+     	} else current = current.next;
+
+     	return result;
+    }
+}
+
+/**
+ * Your ZigzagIterator will be called like this:
+ * ZigzagIterator i = new ZigzagIterator(v1, v2);
+ * while (i.HasNext()) v[f()] = i.Next();
+ */
+```
 
 ### 2-list scenario
 ```c#
