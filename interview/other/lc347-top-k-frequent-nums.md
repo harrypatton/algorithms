@@ -24,6 +24,10 @@ optimization: during the sorting, we can use a mini heap to do that, so time com
 use `(i + 1) /2 - 1` instead of `(i - 1) / 2` which returns the same value except the root node. It would make hard to check if we reach the root.
 2. Check out the Heapify method. Very important to remember that.
 
+## Update
+Check discussion page. It has an awesome bucket sort method. Declare an array of `List<int>`. The array length is the same as input array length. With hash table, use the Count as the array index and add the element to the list. When it is done. scan from the last to the first one.
+
+## Code
 ```c#
 public class Solution {    
     public class KeyCount {
