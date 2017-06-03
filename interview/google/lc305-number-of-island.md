@@ -112,3 +112,54 @@ public class Solution {
     }
 }
 ```
+
+## My own code using Union-Find
+```c#
+public class Solution {
+    public IList<int> NumIslands2(int m, int n, int[,] positions) {
+        var islands = new int[m*n];
+        var map = new bool[m, n];
+        var result = new List<int>();
+
+        for(int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                islands[i * n + j] = i * n + j;
+            }
+        }
+
+        var count = 0;
+        var offsets = new int[,] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+        for(int i = 0; i < positions.GetLength(0); i++) {
+            var x = positions[i, 0];
+            var y = positions[i, 1];
+
+            count++;
+            map[x, y] = true;
+            var root = FindRoot(x * n + y, islands);
+
+            for(int j = 0; j < offsets.GetLength(0); j++) {
+                var x1 = x + offsets[j, 0];
+                var y1 = y + offsets[j, 1];
+                if (x1 >= 0 && y1 >= 0 && x1 < m && y1 < n && map[x1, y1]) {
+                    var newRoot = FindRoot(x1 * n + y1, islands);
+                    if (root != newRoot) {                        
+                        islands[root] = newRoot;
+                        root = newRoot;
+                        count--;
+                    }
+                }
+            }
+
+            result.Add(count);
+        }
+
+        return result;
+    }
+
+    public int FindRoot(int index, int[] islands) {
+        while(islands[index] != index) index = islands[index];
+        return index;
+    }
+}
+```
